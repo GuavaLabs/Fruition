@@ -1,11 +1,18 @@
-html,
-body {
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/*
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Bangers', cursive;
+*/
+
+html,body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #817788;
 }
-
+/*
 a {
   color: inherit;
   text-decoration: none;
@@ -13,4 +20,92 @@ a {
 
 * {
   box-sizing: border-box;
+} */
+
+/* Sections */
+.section-row{
+  display: flex;
+  flex-direction: row;
+}
+.section-column{
+  display: flex;
+  flex-direction: column;
+}
+/* Sub Boxes */
+.box-column{
+  display: flex;
+  flex-direction: column;
+}
+.box-row{
+  display: flex;
+  flex-direction: row;
+}
+
+/* Header */
+.title-img{
+  margin-left: 1.5rem;
+}
+
+.header-nav{
+  margin-left: auto;
+  margin-right: 1.5rem;
+}
+
+.header-nav > ul {
+  list-style-type: none;
+}
+
+.list-item{
+  padding: .5rem;
+  display:  inline;
+  /*
+  border-radius: 25px;
+  */
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-left: .5em;
+  color: white;
+}
+
+.list-item-img{
+  padding: .1rem;
+  display: inline;
+}
+
+/*  Section 1 Styling */
+.section-1{
+  justify-content: center;
+}
+
+.section-1-h2{
+  font-family: 'Bangers', cursive;
+  color: white;
+  align-self: flex-start;
+  justify-content: flex-start;
+  font-size: 4rem;
+}
+
+.section-1-mid{
+  font-family: 'Bangers', cursive;
+  color: white;
+
+  text-align: center;
+  font-size: 3.5rem;
+  margin: 0px;
+  font-weight: bold;
+}
+
+.section-1-h2-west{
+  font-family: 'Bangers', cursive;
+  color: white;
+  align-self: flex-start;
+  justify-content: flex-start;
+  font-size: 4rem;
+  margin-left: auto;
+}
+
+/* Icon styling */
+.filter{
+  filter: invert(100%);
 }
