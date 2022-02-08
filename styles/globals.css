@@ -1,17 +1,41 @@
 /* Imports */
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
 
 /*
     font-family: 'Bebas Neue', cursive;
     font-family: 'Bangers', cursive;
 */
 
-html,body {
-  padding: 0;
-  margin: 0;
-  background-color: #817788;
+html, body {
+  padding: 0px;
+  margin: 0px;
+  /* #817788 */
+  color: white;
+  background-color: black;
 }
+
+/*
+body{
+
+  background-image: url('../public/1_dapp.png');
+  background-size: cover;
+  background-position: top;
+}
+*/
+
+.header{
+  /*
+  background-image: url('../public/dap_top.png');
+  background-size: cover;
+  */
+  /*
+    background-position: top;
+  */
+
+}
+
 /*
 a {
   color: inherit;
@@ -76,6 +100,11 @@ a {
 /*  Section 1 Styling */
 .section-1{
   justify-content: center;
+  /*
+  background-image: url('../public/dap_top.png');
+  background-position: center;
+  background-size: cover;
+  */
 }
 
 .section-1-h2{
@@ -84,6 +113,7 @@ a {
   align-self: flex-start;
   justify-content: flex-start;
   font-size: 4rem;
+  margin: 0px;
 }
 
 .section-1-mid{
@@ -98,12 +128,45 @@ a {
 
 .section-1-h2-west{
   font-family: 'Bangers', cursive;
-  color: white;
-  align-self: flex-start;
-  justify-content: flex-start;
-  font-size: 4rem;
-  margin-left: auto;
+  font-size: 9.375rem;
+  margin: 0px;
+  position: relative;
+  top: 6rem;
+  right: 5rem;
 }
+
+.section-1-h2-east{
+  font-family: 'Bangers', cursive;
+  font-size: 9.375rem;
+  margin: 0px;
+  position: relative;
+  top: 6rem;
+  left: 16rem;
+}
+
+
+.section-line{
+  position: relative;
+}
+
+/* Image Wrapping */
+
+.image-wrapper{
+  box-sizing: content-box;
+}
+
+.image-west > span{
+  position: relative;
+  top: 3.5rem;
+  left: 17.5rem;
+}
+
+.image-east > span{
+  position: relative;
+  top: 3.5rem;
+  right: 14rem;
+}
+
 
 /* Icon styling */
 .filter{
