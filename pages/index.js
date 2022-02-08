@@ -4,22 +4,27 @@ import styles from '../styles/Home.module.css'
 
 // PUT HEADER in _app.js
 
+// <h2 className='section-1-mid'>MINT-A-MORPHLING</h2>
+
 export default function Home() {
   return (
     <>
       {/* Section 1 */}
       <section  className='section-row  section-1'>
         <div  className='box-column'>
-          <h2 className='section-1-h2'>WEST</h2>
+          <div>
+              <h2 className='section-1-h2-west'>WEST</h2>
+          </div>
           <Image src={'/morphs_west.png'} height={250} width={450}/>
         </div>
         <div  className='box-column'>
           {/* IMAGE GOES HERE WITH LINK*/}
-          <Image src={'/mint_button.png'} height={400} width={370}/>
-          <h2 className='section-1-mid'>MINT-A-MORPHLING</h2>
+          <Image src={'/mint_button2.png'} height={306} width={358}/>
         </div>
         <div  className='box-column'>
-          <h2 className='section-1-h2-west'>EAST</h2>
+          <div>
+            <h2 className='section-1-h2-east'>EAST</h2>
+          </div>
           <Image src={'/morphs_east.png'} height={250} width={450}/>
         </div>
       </section>

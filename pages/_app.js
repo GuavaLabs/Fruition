@@ -6,7 +6,7 @@ import Link from 'next/link';
 function MyApp({ Component, pageProps }) {
   return(
     <>
-      <header className='section-row'>
+      <header className='section-row header'>
         <Image src={'/fruition-title.png'} width={340} height={55} className="title-img"/>
         {/* time.component */}
         <nav  className='header-nav'>
