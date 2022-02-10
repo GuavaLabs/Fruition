@@ -2,10 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
 
 /*
+    Comic Neue
     font-family: 'Bebas Neue', cursive;
     font-family: 'Bangers', cursive;
+    font-family: 'Comic Neue', cursive;
 */
 
 html, body {
@@ -15,36 +18,6 @@ html, body {
   color: white;
   background-color: black;
 }
-
-/*
-body{
-
-  background-image: url('../public/1_dapp.png');
-  background-size: cover;
-  background-position: top;
-}
-*/
-
-.header{
-  /*
-  background-image: url('../public/dap_top.png');
-  background-size: cover;
-  */
-  /*
-    background-position: top;
-  */
-
-}
-
-/*
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-} */
 
 /* Sections */
 .section-row{
@@ -97,17 +70,99 @@ a {
   display: inline;
 }
 
-/*  Section 1 Styling */
-.section-1{
-  justify-content: center;
-  /*
-  background-image: url('../public/dap_top.png');
-  background-position: center;
-  background-size: cover;
-  */
+/* Section 1 Styling */
+.section-1-header{
+  text-align: center;
+  font-family: 'Bangers', cursive;
+  font-size: 3.5rem;
 }
 
-.section-1-h2{
+.section-1-header > h1{
+  margin: 0px;
+}
+
+.button-selection{
+
+}
+
+.button-selection > h2{
+  font-family: 'Finger Paint';
+  font-size: 1.5rem;
+  margin-top: 0px;
+}
+
+.button-selection > p {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.2rem;
+  width: 242px;
+  text-align: center;
+}
+
+/* Temporary */
+.section-1-spacing{
+  justify-content: space-between;
+}
+
+.section-1-gap{
+  gap: 2rem;
+}
+
+.section-1-h1{
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3rem;
+  color: #FFB3E4;
+}
+
+.text-box{
+  width: 25%;
+  font-size: 1.1rem;
+}
+
+.text-box > p {
+  font-family: 'Comic Neue', cursive;
+}
+
+.section-1-alt-h1{
+  font-size: 1.5rem;
+  margin: 0px;
+  margin-top: 4rem;
+}
+
+.section-1-prompts{
+  padding: 1rem;
+}
+
+.subbutton-blurb{
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.2rem;
+}
+
+
+.button-web3-prompts{
+  padding: 1rem;
+  text-align: center;
+  background-color: #66EFDF;
+  border-radius: 20px;
+  border: 5px solid #FFFFFF;
+
+  font-family: 'Bebas Neue', cursive;
+  color: white;
+  font-size: 2.188rem;
+  margin-left: 2.5rem;
+}
+
+.special{
+  justify-content: center;
+}
+
+
+
+/*  Section 2 Styling */
+.section-2{
+  justify-content: center;
+}
+
+.section-2-h2{
   font-family: 'Bangers', cursive;
   color: white;
   align-self: flex-start;
@@ -116,7 +171,7 @@ a {
   margin: 0px;
 }
 
-.section-1-mid{
+.section-2-mid{
   font-family: 'Bangers', cursive;
   color: white;
 
@@ -126,22 +181,22 @@ a {
   font-weight: bold;
 }
 
-.section-1-h2-west{
+.section-2-h2-west{
   font-family: 'Bangers', cursive;
   font-size: 9.375rem;
   margin: 0px;
   position: relative;
   top: 6rem;
-  right: 5rem;
+  right: 4.8rem;
 }
 
-.section-1-h2-east{
+.section-2-h2-east{
   font-family: 'Bangers', cursive;
   font-size: 9.375rem;
   margin: 0px;
   position: relative;
   top: 6rem;
-  left: 16rem;
+  left: 15.5rem;
 }
 
 
@@ -167,6 +222,17 @@ a {
   right: 14rem;
 }
 
+.mint-blurb{
+  text-align: center;
+  font-family: 'Comic Neue', cursive;
+  font-size: 1rem;
+}
+
+.head-blurb{
+  font-size: 1.2rem;
+  font-family: 'Finger Paint';
+  text-align: center;
+}
 
 /* Icon styling */
 .filter{
