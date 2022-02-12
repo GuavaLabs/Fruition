@@ -1,8 +1,9 @@
 /* Imports */
+
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
- @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
 
 /*
     Comic Neue
@@ -36,6 +37,10 @@ html, body {
 .box-row{
   display: flex;
   flex-direction: row;
+}
+
+.box-center{
+  justify-content: center;
 }
 
 /* Header */
@@ -135,6 +140,8 @@ html, body {
 .subbutton-blurb{
   font-family: 'Comic Neue', cursive;
   font-size: 1.2rem;
+  text-align: center;
+  margin-top: 0px;
 }
 
 
@@ -154,6 +161,51 @@ html, body {
 .special{
   justify-content: center;
 }
+
+.minting-div{
+  border: .3rem solid white;
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.minting-div > button{
+  display: inline-block;
+  text-align: center;
+}
+
+.minting-div > div{
+  text-align: center;
+}
+/*
+.sub-mint > button, span, h3{
+  display: inline;
+} */
+.sub-mint{
+  gap: .5rem;
+}
+
+
+.mint-button{
+  background-color: #B434C0;
+  border-radius: 50%;
+  border: none;
+
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bolder;
+
+  padding: 1rem;
+  width: 3.5rem;
+
+  cursor: pointer;
+
+}
+
+.mint-button:hover{
+  background-color: #992ca3;
+}
+
+
 
 
 
@@ -238,3 +290,90 @@ html, body {
 .filter{
   filter: invert(100%);
 }
+
+/* Section 3 */
+
+.section-3{
+  padding: 1rem;
+}
+
+.image-thing{
+  width: 60%;
+  height: 50%;
+  /*
+  margin-left: auto;
+  */
+}
+
+.section-3-h1{
+  font-size: 7rem;
+  font-family: 'Bebas Neue', cursive;
+  margin-top: 0px;
+  margin-bottom: 1rem;
+}
+
+.section-3-h3{
+  font-size: 2rem;
+  font-family: 'Finger Paint';
+  color: #FFB3E4;
+  margin-top: 0px;
+  margin-bottom: 1rem;
+}
+
+.section-3-text{
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.2rem;
+
+  width: 100%;
+  height: 50%;
+  gap: 1rem;
+}
+
+/* Section 4 */
+
+.section-4{
+  padding: 1rem;
+}
+
+.phase-component{
+  padding: 2rem;
+  width: 80%;
+}
+
+.section-4-header{
+
+}
+
+.section-4-header > h2{
+  font-family: 'Finger Paint';
+  margin: 0px;
+  font-size: 2.5rem;
+}
+
+.section-4-header > h3 {
+  margin:0px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.6rem;
+}
+
+.section-4-text{
+  width: 70%;
+  font-size: 1.1rem;
+}
+
+.section-4-h1{
+  font-size: 7rem;
+  font-family: 'Bebas Neue', cursive;
+  margin-top: 0px;
+  margin-bottom: 1rem;
+
+}
+
+.section-4-p{
+  font-family: 'Finger Paint';
+  color: #FFC0CB;
+
+  margin-left: auto;
+}
+
+/* linear-gradient(180deg, #9500B1 0%, #FBD5E3 46.35%, #FFFFFF 97.92%) */
