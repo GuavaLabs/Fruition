@@ -24,6 +24,12 @@ Repository for Fruition On Demand NFT minting web application
 * Created PhaseComponent
 * Fixed MintQuantityComponent Styling
 
+## A1.4
+* Created Footer
+* Restyled Section 4
+* Added additional images to Section 4
+* Added PlaceHolder Image to Footer
+
 # CONTRACT NOTES
 
 * Asset.sol containing function _mintFor(address user, uint256 id, bytes memory) has been deployed to Ropsten test network.

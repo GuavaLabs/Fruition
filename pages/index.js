@@ -8,8 +8,6 @@ import PhaseComponent from '../Components/PhaseComponent'
 
 // PUT HEADER in _app.js
 
-// <h2 className='section-1-mid'>MINT-A-MORPHLING</h2>
-
 export default function Home() {
   return (
     <>
@@ -60,7 +58,7 @@ export default function Home() {
           <p  className='mint-blurb'>1 click generates total amount of specified assets</p>
         </div>
         <div  className='box-column'>
-          <div>
+          <div  className='section-2-east'>
             <h2 className='section-2-h2-east'>EAST</h2>
           </div>
           <Image src={'/morphs_east.png'} height={250} width={450}/>
@@ -88,14 +86,20 @@ export default function Home() {
         </div>
         <div  className='box-row'>
           <PhaseComponent />
+          <div  className='arrow'>
+            <Image src={'/arrows.png'} height={175} width={103}/>
+          </div>
           <PhaseComponent />
+          <div  className='arrow'>
+            <Image src={'/arrows.png'} height={175} width={103}/>
+          </div>
           <PhaseComponent />
         </div>
       </section>
-      {/* footer */}
-      <footer>
+      {/* Footer */}
+      <footer className='footer section-row'>
         <div>
-          <p>Footer Text</p>
+          <Image src={'/footer_logos.png'} height={123} width={923}/>
         </div>
       </footer>
     </>

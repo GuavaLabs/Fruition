@@ -144,7 +144,6 @@ html, body {
   margin-top: 0px;
 }
 
-
 .button-web3-prompts{
   padding: 1rem;
   text-align: center;
@@ -205,10 +204,6 @@ html, body {
   background-color: #992ca3;
 }
 
-
-
-
-
 /*  Section 2 Styling */
 .section-2{
   justify-content: center;
@@ -237,18 +232,23 @@ html, body {
   font-family: 'Bangers', cursive;
   font-size: 9.375rem;
   margin: 0px;
+  /*
   position: relative;
   top: 6rem;
   right: 4.8rem;
+  */
 }
 
 .section-2-h2-east{
   font-family: 'Bangers', cursive;
   font-size: 9.375rem;
   margin: 0px;
+  /*
   position: relative;
   top: 6rem;
   left: 15.5rem;
+  */
+  text-align: end;
 }
 
 
@@ -336,8 +336,11 @@ html, body {
 }
 
 .phase-component{
-  padding: 2rem;
-  width: 80%;
+  width: 343px;
+
+  border-image: linear-gradient(180deg, #9500B1 0%, #FBD5E3 46.35%, #FFFFFF 97.92%) 0 50 50 0;
+  border-style: solid;
+  border-width: .5rem;
 }
 
 .section-4-header{
@@ -357,7 +360,8 @@ html, body {
 }
 
 .section-4-text{
-  width: 70%;
+  width: 90%;
+
   font-size: 1.1rem;
 }
 
@@ -373,7 +377,18 @@ html, body {
   font-family: 'Finger Paint';
   color: #FFC0CB;
 
-  margin-left: auto;
+  margin-left: 30%;
 }
 
-/* linear-gradient(180deg, #9500B1 0%, #FBD5E3 46.35%, #FFFFFF 97.92%) */
+.arrow{
+  align-self: center;
+  padding: .8rem;
+}
+
+.section-4-row{
+  gap: .1rem;
+}
+
+.footer{
+  padding: 1rem;
+}
