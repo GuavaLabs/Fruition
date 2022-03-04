@@ -135,6 +135,7 @@ html, body {
 
 .section-1-prompts{
   padding: 1rem;
+  flex-wrap: wrap;
 }
 
 .subbutton-blurb{
@@ -391,4 +392,19 @@ html, body {
 
 .footer{
   padding: 1rem;
+
+  align-items: center;
+  gap: .5rem;
+}
+
+.footer-text{
+  text-align: center;
+  font-size: 3.5rem;
+  color: white;
+
+  font-family: 'Bebas Neue', cursive;
+}
+
+.wrap{
+  flex-wrap: wrap;
 }

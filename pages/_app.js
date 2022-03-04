@@ -1,9 +1,18 @@
 import '../styles/globals.css'
 import Image from 'next/image'
 import Link from 'next/link';
+import AOS from "aos";
+import React, { useEffect } from "react";
 // <Component {...pageProps}
 
 function MyApp({ Component, pageProps }) {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
+
   return(
     <>
       <header className='section-row header'>
