@@ -20,7 +20,7 @@ import axios from "axios";
 //const { ethereum } = window;
 
 /* Production addresses */
-//const linkAddress = 'https://link.x.immutable.com';
+const _link = new Link("https://link.x.immutable.com");
 //const apiAddress = 'https://api.x.immutable.com/v1'
 
 /*Z Ropsten/Test addresses */
@@ -64,6 +64,7 @@ export default function Home() {
     e.preventDefault();
   }
 
+  //TODO
   // Counter for tokens
 
   // const counterRequest = () => {
@@ -95,6 +96,7 @@ export default function Home() {
     });
   };
 
+  /*Connects to Web3 ethereum*/
   const connectWallet = async() =>{
 
     await window.ethereum.request({
@@ -164,6 +166,30 @@ export default function Home() {
     }
   }
 
+  const connectWalletImx = async() =>{
+
+    let address = localStorage.address;
+ 
+    const registered = await accountRegistered(address.toLowerCase());
+
+    if(!registered){
+      try{
+        //register the user via link
+        window.alert("ok");
+        const address = await _link.setup({});
+        window.alert("good job soldireure");
+        //current address is set in state
+        setCurrentAddress(address.address);
+      }
+      catch(error){
+        window.alert("you are a: " + error);
+      }
+    }
+    else if(registered){
+      window.alert("25 boodboy tokens++");
+    }
+  };
+
   // Disconnect wallet button, wipe everything
   const disconnectWallet = () => {
     localStorage.removeItem("address");
@@ -202,7 +228,7 @@ export default function Home() {
               </div>
               <div  className='button-selection'>
                 <h2>2. Unlock Immutible</h2>
-                <button className='button-web3-prompts'>Click here</button>
+                <button className='button-web3-prompts' onClick={connectWalletImx}>Click here</button>
                 <p>A portal to Immutable X will present itself, follow its prompts</p>
               </div>
               {/*
