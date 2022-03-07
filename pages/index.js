@@ -43,6 +43,7 @@ export default function Home() {
   // Default value is 10, setValue modifies
   const [value, setValue] = useState(10);
   //const eth = process.env.REACT_APP_PRICE * value;
+  const eth = 2.5
   // Default value is false, setEligable modifies
   const [eligable, setEligable] = useState(false);
   // Default value is false, setLogged modifies
@@ -87,6 +88,7 @@ export default function Home() {
         await axios.get(
           // Production
           //`https://api.x.immutable.com/v1/users/${address.toLowerCase()}`
+          // Testing
           `https://api.ropsten.x.immutable.com/v1/users/${address.toLowerCase()}`
         );
         resolve(true);
@@ -112,83 +114,110 @@ export default function Home() {
     const account = await ethereum.request({ method: "eth_requestAccounts" });
     // saves address in local storage
     localStorage.setItem("address", account[0]);
-
-    const registered = await accountRegistered(account[0].toLowerCase());
-
-    console.log(registered)
-
-    if (registered) {
-      try {
-        // API request
-        // makes a POST request to the API which will check the DB for the address in the whitelist
-        // this returns a bool
-        await axios.get(
-          `${process.env.REACT_APP_URL}/api/v1/sale/${localStorage.getItem("address")}`
-        );
-        setEligable(true);
-        setLogged(true);
-      } catch {
-        setLogged(true);
-        setEligable(false);
-        msgChange(true);
-
-        // since false is returned, trasaction initiation is killed
-        changeMsg(
-          `${localStorage.getItem("address")} is not on the whitelist!`
-        );
-        console.log("Unauthorized");
-      }
-    } else {
-      try {
-        // Register the user via link?
-        const address = await link.setup({});
-        // Current address is set in state
-        setCurrentAddress(address.address);
-
-        //Check if address is in whitelist
-        const eligable = await axios.get(
-          `${process.env.REACT_APP_URL}/api/v1/sale/${currentAddress}`
-        );
-        console.log(eligable);
-        setEligable(true);
-        setCurrentAddress(address[0]);
-        setLogged(true);
-        localStorage.setItem("address", account[0]);
-      } catch {
-        setLogged(true);
-        setEligable(false);
-        msgChange(true);
-        changeMsg(
-          `${localStorage.getItem("address")} is not on the whitelist!`
-        );
-        console.log("Unauthorized");
-      }
-    }
   }
 
   const connectWalletImx = async() =>{
 
+    // Get Local Address From Storage
     let address = localStorage.address;
- 
+
+    // Try and See If User is Registered | Returns Bool
     const registered = await accountRegistered(address.toLowerCase());
 
+    // If not registered
     if(!registered){
       try{
         //register the user via link
-        window.alert("ok");
         const address = await _link.setup({});
-        window.alert("good job soldireure");
+
         //current address is set in state
         setCurrentAddress(address.address);
+
+        console.log("USER REGISTERED")
+        // Set StateVariables
+        setEligable(true);
+        setCurrentAddress(address[0]);
+        setLogged(true);
+        localStorage.setItem("address", account[0]);
       }
       catch(error){
-        window.alert("you are a: " + error);
+        setLogged(true);
+        setEligable(false);
+        msgChange(true);
+
+        console.log(error)
+        console.log(`An error occured ${error}`)
       }
     }
     else if(registered){
-      window.alert("25 boodboy tokens++");
+      console.log(`USER ${address} is registered`);
+
+      // Set Variables
+      setEligable(true);
+      setLogged(true);
     }
   };
+
+  // Mint Token
+  const mintToken = async () =>{
+    // Default Payment will be ETH
+    try{
+      const accounts = await web3.eth.getAccounts();
+      let reciever = process.env.REACT_APP_TREASUREY
+
+      // Create Transaction
+      web3.eth.sendTransaction({
+        to: reciever,
+        from: accounts[0],
+        // value: web3.utils.toWei(eth.toString(), "ether")
+        // TESTING VAL
+        value: web3.utils.toWei(eth.toString(), "ether")
+      }, async (err, res) => {
+
+        if(res){
+          console.log(res);
+
+          const body_data = {
+            // Get local address
+            address: localStorage.getItem("address"),
+            // Hash == Transaction Hash from Res
+            hash: res,
+            type: "ETH",
+            // Value = Num of NFT/Tokens purchased by User
+            quantity: 1
+          };
+
+          // Set StateVariables
+          setEligable(false);
+          setLoading(true);
+
+          try{
+
+            const response = await axios.post(
+              `${process.env.REACT_APP_URL}/api/v1/mint`,
+              body_data
+            );
+
+            console.log(response);
+            // Upon success, change state vars to defaults
+            setLoading(false);
+            setEligable(true);
+
+            console.log(response);
+
+            window.alert("YOUR TOKEN HAS BEEN MINTED")
+          } catch(error){
+            console.log(error);
+
+            setLoading(false);
+            setEligable(true);
+          }
+        }
+      })
+    }catch(error){
+      console.log(`Something happened: ${error}`)
+    }
+  }
 
   // Disconnect wallet button, wipe everything
   const disconnectWallet = () => {
@@ -197,8 +226,6 @@ export default function Home() {
     setEligable(false);
     msgChange(false);
   };
-
-
 
   useEffect(() =>{
     // Local DOM window
@@ -256,7 +283,7 @@ export default function Home() {
         <div  className='box-column'>
           {/* IMAGE GOES HERE WITH LINK*/}
           <h2 className='mint-blurb head-blurb'>4. Mint by clicking the button below</h2>
-          <Image src={'/mint_button2.png'} height={340} width={358}/>
+          <Image src={'/mint_button2.png'} onClick={mintToken} height={340} width={358}/>
           <p  className='mint-blurb'>1 click generates total amount of specified assets</p>
         </div>
         <div  className='box-column'>
