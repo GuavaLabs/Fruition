@@ -16,34 +16,38 @@ import { React, useState, useEffect } from "react";
 import Web3 from "web3";
 // Axios request handlers
 import axios from "axios";
-// Local DOM window
-//const { ethereum } = window;
 
-/* Production addresses */
-const _link = new Link("https://link.x.immutable.com");
-//const apiAddress = 'https://api.x.immutable.com/v1'
+//require('dotenv').config()
 
-/*Z Ropsten/Test addresses */
-//const linkAddress = 'https://link.ropsten.x.immutable.com';
-//const apiAddress = 'https://api.ropsten.x.immutable.com/v1'
+/* Local API */
 
-// Link SDK
-//const link = new Link(linkAddress);
+let localAPI = 'http://localhost:3000/api/mint'
 
-// IMX Client
-//const client = await ImmutableXClient.build({ publicApiUrl: apiAddress});
+/* Declare Production Variables before assignment */
 
+let _link, apiAddress;
 
-// PUT HEADER in _app.js
+/* Determine if in Production */
 
-// Home == Main for DAP
+if(process.env.PRODUCTION == "True"){
+  console.log("Web App in Production")
+  _link = new Link("https://link.x.immutable.com");
+  apiAddress = 'https://api.x.immutable.com/v1/'
+
+}else{
+  console.log("Web App in Testing")
+  console.log(process.env.PRODUCTION)
+  _link = new Link('https://link.ropsten.x.immutable.com')
+  apiAddress = 'https://api.ropsten.x.immutable.com/v1/'
+
+}
 
 export default function Home() {
 
   // Default value is 10, setValue modifies
   const [value, setValue] = useState(10);
   //const eth = process.env.REACT_APP_PRICE * value;
-  const eth = 2.5
+  const eth = 0.1
   // Default value is false, setEligable modifies
   const [eligable, setEligable] = useState(false);
   // Default value is false, setLogged modifies
@@ -86,10 +90,7 @@ export default function Home() {
     return new Promise(async (resolve, reject) => {
       try {
         await axios.get(
-          // Production
-          //`https://api.x.immutable.com/v1/users/${address.toLowerCase()}`
-          // Testing
-          `https://api.ropsten.x.immutable.com/v1/users/${address.toLowerCase()}`
+          `${apiAddress}users/${address.toLowerCase()}`
         );
         resolve(true);
       } catch {
@@ -156,66 +157,71 @@ export default function Home() {
       setEligable(true);
       setLogged(true);
     }
+    window.alert("You have unlocked I M M U T I B L E  X")
   };
 
   // Mint Token
   const mintToken = async () =>{
-    // Default Payment will be ETH
-    try{
+    //Grab client window
+    const web3 = new Web3(window.ethereum);
+    // Default Payment is ETH
+    window.alert("Inside Function");
+
+    // Attempt transaction
+
+    try {
       const accounts = await web3.eth.getAccounts();
-      let reciever = process.env.REACT_APP_TREASUREY
 
-      // Create Transaction
-      web3.eth.sendTransaction({
-        to: reciever,
-        from: accounts[0],
-        // value: web3.utils.toWei(eth.toString(), "ether")
-        // TESTING VAL
-        value: web3.utils.toWei(eth.toString(), "ether")
-      }, async (err, res) => {
+      let receiver = process.env.TREASURY
+      console.log(receiver)
 
-        if(res){
-          console.log(res);
+      web3.eth.sendTransaction(
+        /* Body for Transaction */
+        {
+          to: receiver,
+          from: accounts[0],
+          value: web3.utils.toWei(eth.toString(), "ether"),
+        },
+        /* Call Back */
+        async function (err, res) {
+          if(res){
+            // test Alert
+            window.alert('Response given, check console')
+            console.log(res)
 
-          const body_data = {
-            // Get local address
-            address: localStorage.getItem("address"),
-            // Hash == Transaction Hash from Res
-            hash: res,
-            type: "ETH",
-            // Value = Num of NFT/Tokens purchased by User
-            quantity: 1
-          };
+            // Object to be passed to the API
+            const body_data = {
+              address: localStorage.getItem("address"),
+              hash: res,
+              type: "ETH",
+              quantity: value,
+            };
 
-          // Set StateVariables
-          setEligable(false);
-          setLoading(true);
+            setEligable(false)
+            setLoading(true)
 
-          try{
+            try {
+              window.alert('Making an API request')
 
-            const response = await axios.post(
-              `${process.env.REACT_APP_URL}/api/v1/mint`,
-              body_data
-            );
+              const response = await axios.post(`${process.env.REACT_APP_URL}/api/v1/mint`, body_data)
+              console.log(response)
+              setLoading(false);
+              setEligable(true);
+              console.log(response);
+            } catch(err){
 
-            console.log(response);
-            // Upon success, change state vars to defaults
-            setLoading(false);
-            setEligable(true);
-
-            console.log(response);
-
-            window.alert("YOUR TOKEN HAS BEEN MINTED")
-          } catch(error){
-            console.log(error);
-
-            setLoading(false);
-            setEligable(true);
+              window.alert('Error, check console')
+              console.log(err)
+              setLoading(false);
+              setEligable(true);
+            }
           }
         }
-      })
-    }catch(error){
-      console.log(`Something happened: ${error}`)
+      )
+    } catch(e) {
+      console.log(`Something happened ${e}`)
+      // Testing Alert
+      window.alert('Something Happened, Check console.')
     }
   }
 

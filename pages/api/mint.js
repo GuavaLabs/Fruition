@@ -1,11 +1,15 @@
-const wallet = require("@ethersproject/wallet");
+//const wallet = require("@ethersproject/wallet");
 const { ImmutableXClient, MintableERC721TokenType, ERC721TokenType } =  require('@imtbl/imx-sdk');
+//const providers = require("@ethersproject/providers");
 // const {setMinted} = require("../db/db")
-require("dotenv").config()
-
-//const provider = new providers.AlchemyProvider(process.env_backend_backend.NETWORK, process.env_backend_backend.API_KEY);
+// require("dotenv").config()
+import { AlchemyProvider } from '@ethersproject/providers';
+import { Wallet } from '@ethersproject/wallet';
+//const provider = new providers.AlchemyProvider(process.env.NETWORK, process.env.API_KEY);
+const provider = new AlchemyProvider(process.env.ethNetwork, process.env.alchemyApiKey);
 // Main wallet
-const signer = new wallet.Wallet(process.env_backend_backend.WALLET_KEY).connect(provider);
+console.log(provider)
+const signer = new Wallet(process.env.WALLET_KEY).connect(provider);
 
 // Sleep Function
 function sleep(ms) {
@@ -18,7 +22,7 @@ function sleep(ms) {
 let IMXURL, STARK, REGISTRATION;
 
 // If in Production, assign variables production values
-if(process.env_backend.PROD == true){
+if(process.env.PROD == true){
   console.log("PRODUCTION")
 
   IMXURL = "https://api.x.immutable.com/v1"
@@ -37,7 +41,7 @@ if(process.env_backend.PROD == true){
 
 // MintNFT function
 
-const mintNFT(toAddress, token) => {
+const mintNFT = (toAddress, token) => {
   //console.log(toAddress, token)
   //res.status(200).json({Status: "OK"});
 
@@ -58,15 +62,15 @@ const mintNFT(toAddress, token) => {
     try{
       const result = await client.mintV2([{
 
-        contractAddress: process.env_backend.CONTRACT.toLowerCase(),
+        contractAddress: process.env.CONTRACT.toLowerCase(),
 
         // Assign royalties to wallet
         // ?How will this be sent if transaction was done
         // on front end?
         royalties:[
           {
-            recipient: process.env_backend.ROYALTY.toLowerCase(),
-            percentage: parseFloat(process.env_backend.PERCENTAGE)
+            recipient: process.env.ROYALTY.toLowerCase(),
+            percentage: parseFloat(process.env.PERCENTAGE)
           }
         ],
         // Users/Addresses being processed?
@@ -109,12 +113,12 @@ export default function mint(req, res){
 
   // Send Mint Body to Main Function
   try {
-    const mintResult = await mintNFT(
+    const mintResult = async () => { await mintNFT(
       // Body Addres passed as LowerCase address
       req.body.address.toLowerCase(),
       // Token ID | Needs to be Tracked on front-end
       req.body.tokenID
-    );
+    )};
     // If no errors, return 200 "OK"
     res.status(200);
   } catch(e) {
