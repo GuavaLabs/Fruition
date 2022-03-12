@@ -47,7 +47,7 @@ export default function Home() {
   // Default value is 10, setValue modifies
   const [value, setValue] = useState(10);
   //const eth = process.env.REACT_APP_PRICE * value;
-  const eth = 0.1
+  const eth = 0.01
   // Default value is false, setEligable modifies
   const [eligable, setEligable] = useState(false);
   // Default value is false, setLogged modifies
@@ -195,6 +195,7 @@ export default function Home() {
               hash: res,
               type: "ETH",
               quantity: value,
+              tokenID: value
             };
 
             setEligable(false)
@@ -203,7 +204,7 @@ export default function Home() {
             try {
               window.alert('Making an API request')
 
-              const response = await axios.post(`${process.env.REACT_APP_URL}/api/v1/mint`, body_data)
+              const response = await axios.post(`${process.env.REACT_APP_URL}/api/mint`, body_data)
               console.log(response)
               setLoading(false);
               setEligable(true);

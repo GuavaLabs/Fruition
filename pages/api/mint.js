@@ -1,15 +1,12 @@
-//const wallet = require("@ethersproject/wallet");
-const { ImmutableXClient, MintableERC721TokenType, ERC721TokenType } =  require('@imtbl/imx-sdk');
-//const providers = require("@ethersproject/providers");
-// const {setMinted} = require("../db/db")
-// require("dotenv").config()
+const { ImmutableXClient, MintableERC721TokenType, ERC721TokenType, ImmutableMethodParams } =  require('@imtbl/imx-sdk');
+require("dotenv").config()
 import { AlchemyProvider } from '@ethersproject/providers';
 import { Wallet } from '@ethersproject/wallet';
-//const provider = new providers.AlchemyProvider(process.env.NETWORK, process.env.API_KEY);
+
 const provider = new AlchemyProvider(process.env.ethNetwork, process.env.alchemyApiKey);
 // Main wallet
-console.log(provider)
 const signer = new Wallet(process.env.WALLET_KEY).connect(provider);
+//console.dir(signer, {depth: null})
 
 // Sleep Function
 function sleep(ms) {
@@ -21,8 +18,11 @@ function sleep(ms) {
 // Declare Base Variables
 let IMXURL, STARK, REGISTRATION;
 
+
+console.log(process.env)
+
 // If in Production, assign variables production values
-if(process.env.PROD == true){
+if(process.env.PRODUCTION == "True"){
   console.log("PRODUCTION")
 
   IMXURL = "https://api.x.immutable.com/v1"
@@ -39,10 +39,12 @@ if(process.env.PROD == true){
   REGISTRATION="0x6C21EC8DE44AE44D0992ec3e2d9f1aBb6207D864"
 }
 
+//console.log(STARK, IMXURL, REGISTRATION)
+
 // MintNFT function
 
 const mintNFT = (toAddress, token) => {
-  //console.log(toAddress, token)
+  console.log(toAddress, token)
   //res.status(200).json({Status: "OK"});
 
   return new Promise(async (resolve, reject) => {
@@ -57,35 +59,42 @@ const mintNFT = (toAddress, token) => {
       registrationContractAddres: REGISTRATION
     })
 
-    await sleep(5000)
+    //console.dir(client, {depth: null})
+    //await sleep(5000)
 
     try{
-      const result = await client.mintV2([{
 
-        contractAddress: process.env.CONTRACT.toLowerCase(),
+      //console.log("within")
+      // console.log(toAddress)
+      // console.log(token)
+      // console.log(process.env.CONTRACT, process.env.ROYALTY, process.env.PERCENTAGE)
+      const tokens = Array.from({ length: 1 }, (_, i) => i).map(i => ({
+        id: (token).toString(),
+        blueprint: `${token}`,
+      }));
 
-        // Assign royalties to wallet
-        // ?How will this be sent if transaction was done
-        // on front end?
-        royalties:[
-          {
-            recipient: process.env.ROYALTY.toLowerCase(),
-            percentage: parseFloat(process.env.PERCENTAGE)
-          }
-        ],
-        // Users/Addresses being processed?
-        users:[
-          {
-            etherKey: `${toAddress}`.toLowerCase(),
-            tokens:[{
-                // TokenId
-                id: `${token}`,
-                // ?On chain metadata?
-                blueprint: `${token}`
-              }]
-          }
-        ]
-      }])
+      const payload = [
+        {
+          contractAddress: process.env.CONTRACT.toLowerCase(),
+          users: [
+            {
+              etherKey: toAddress.toLowerCase(),
+              tokens,
+            },
+          ],
+        },
+      ];
+
+
+      // console.log(payload)
+      // console.log(payload[0]['users'][0]['tokens'])
+      console.dir(payload, {depth: null})
+
+      const result = await client.mintV2(payload)
+
+      //console.dir(payload, {depth: null})
+
+      console.log("Resolved?")
 
       resolve({status: "Success", token:token})
     // Catch Error
@@ -94,12 +103,12 @@ const mintNFT = (toAddress, token) => {
 
         console.log("Duplicate entry for token", token)
 
-        reject({err:"Duplicate entry.", code:409})
+        reject()
 
 
       }else{
         console.log(error)
-        reject({err: "There was an error.", code: 500})
+        reject()
         console.log(`There was an issue minting token for the address ${toAddress}`)
       }
     }
@@ -107,22 +116,25 @@ const mintNFT = (toAddress, token) => {
 }
 
 // Responds to POST request Only
-export default function mint(req, res){
+export default async function mint(req, res){
   // Assuming req
-  console.log("initiating mints for", req.body.address)
+  //console.log(req.body)
+  //console.log("initiating mints for", req.body.address)
 
   // Send Mint Body to Main Function
   try {
-    const mintResult = async () => { await mintNFT(
+    console.log("TRY")
+    const mintResult = await mintNFT(
       // Body Addres passed as LowerCase address
       req.body.address.toLowerCase(),
       // Token ID | Needs to be Tracked on front-end
       req.body.tokenID
-    )};
-    // If no errors, return 200 "OK"
-    res.status(200);
+    );
   } catch(e) {
     console.log(`The following error occured: ${e}`)
-    res.status(500);
+    //.json({status: "ERROR"});
+    res.status(500).json({status: "ERROR"});
   }
+  // If no errors, return 200 "OK"
+  res.status(200).json({status: "OK"});
 }
