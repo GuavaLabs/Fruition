@@ -15,12 +15,17 @@ function MyApp({ Component, pageProps }) {
 
   return(
     <>
-      <header className='section-row header'>
-        <Image src={'/fruition-title.png'} width={340} height={55} className="title-img"/>
-        {/* time.component */}
-        <nav  className='header-nav'>
+      <header>
+        <div  class="header-title-image">
+          <Image src={'/fruition-title.png'} width={340} height={55} className="title-img"/>
+        </div>
+        {/* Header Title */}
+        <h1 className="header-title-text  bngs-font">
+          mint-a-morphling
+        </h1>
+        <nav  className="bbn-font">
           <ul>
-            {/* FIX IMAGES! */}
+            {/* Images */}
             <Link href="/">
               <li className='list-item'>ROADMAP</li>
             </Link>

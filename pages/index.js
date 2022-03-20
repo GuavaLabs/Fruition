@@ -44,6 +44,13 @@ if(process.env.PRODUCTION == "True"){
 
 export default function Home() {
 
+  let phase_1, phase_2, phase_3;
+
+  phase_1 = ['You’re in it. We come prepared with the comic, the TV pilot, the series bible, and the Morphling NFTs with a ton of fun stats and a fun 50/50 minting event that will write itself into our world.', 'At a bare minimum, owning a FotD NFT means permanent, premium access to our highest resolution content, as early as possible, even the anime some day.']
+  phase_2 = ['If we can get over 50% minted, we can commit to hiring developers to turn the Morphlings into the principle assets of an open playing-cards game environment. ',
+  'Over promise and under deliver much?', 'We still want to try! We want this to be an entirely free to play games environment for community members, not P2E but P2P — and gather and socialize with 800-year old playing cards that have stood the test of time. Play classic games with people from around the world using the metadata of your Morphlings to build depth into medieval-era playing cards, that’s the end goal. We can start small with solitaire, 1 player games, and hire devs in the community to build from there!']
+  phase_3 = ['RIf we can get 100% minted, we can say full-heartedly that we will be using the majority of those proceeds on making a web3 remote-studio animated series pilot... we wanna be on TV Ma!', 'But seriously we are going to pay creators directly using the power of web3, and excited to explore new territory with transparent creator smart-contracts, hiring a ton of cool web3 artists to join forces on a wild animated series super-project.', 'We’ll need a lot of help on this part if it comes to pass, but there’s an opportunity here to help evolve the way animated series are made altogether.']
+
   // Default value is 10, setValue modifies
   const [value, setValue] = useState(10);
   //const eth = process.env.REACT_APP_PRICE * value;
@@ -194,8 +201,9 @@ export default function Home() {
               address: localStorage.getItem("address"),
               hash: res,
               type: "ETH",
-              quantity: value,
-              tokenID: value
+              quantity: 1,
+              // 5
+              tokenID: 5
             };
 
             setEligable(false)
@@ -204,7 +212,8 @@ export default function Home() {
             try {
               window.alert('Making an API request')
 
-              const response = await axios.post(`${process.env.REACT_APP_URL}/api/mint`, body_data)
+              // `${process.env.REACT_APP_URL}/api/mint`
+              const response = await axios.post(`${process.env.REACT_APP_URL}/api/v1/mint`, body_data)
               console.log(response)
               setLoading(false);
               setEligable(true);
@@ -244,96 +253,79 @@ export default function Home() {
   });
 
   return (
-    <>
-      {/* Section 1 */}
-      <section  className='section-column'>
-        <div  className='section-1-header'>
-          <h1>MINT-A-MORPHLING</h1>
-        </div>
-        {/* MINTING BUTTONS | SHOULD BE COMPONENT*/}
-        <div  className='box-row  section-1-spacing section-1-prompts'>
-          <div  className='box-column'>
-            <h2 className='section-1-h1'>Steps to mint</h2>
-            <div  className='box-row section-1-spacing section-1-gap'>
-              <div  className='button-selection'>
-                <h2>1. Connect Wallet</h2>
-                <button className="button-web3-prompts" onClick={connectWallet}>Click here</button>
-                <p>Works with any Ethereum based wallet</p>
-              </div>
-              <div  className='button-selection'>
-                <h2>2. Unlock Immutible</h2>
-                <button className='button-web3-prompts' onClick={connectWalletImx}>Click here</button>
-                <p>A portal to Immutable X will present itself, follow its prompts</p>
-              </div>
-              {/*
-                <div  className='button-selection'>
-                  <h2>3. Select the amount to mint</h2>
-                  <MintQuantityComponent />
+    <div  className="container">
+      {/* Main */}
+      <section  class="section-1">
+        <div  className='box-column steps-box'>
+              <h1 className='bbn-font'>Steps to mint</h1>
+              <div  className='box-row button-box-major'>
+                <div  className='button-box button-box-1'>
+                  <h2 className='fngr-font'>1. Connect Wallet</h2>
+                  {/* onClick={connectWallet} */}
+                  <button className="button-web3-prompts  bbn-font">Click here</button>
+                  <p>Works with any Ethereum based wallet</p>
                 </div>
-                */}
+                <div  className='button-box button-box-2'>
+                  <h2 className='fngr-font'>2. Unlock Immutible</h2>
+                  {/* onClick={connectWallet} */}
+                  <button className='button-web3-prompts  bbn-font'>Click here</button>
+                  <p>A portal to Immutable X will present itself, follow its prompts</p>
+                </div>
+              </div>
+          </div>
+          <div  className='button-selection'>
+            <h2>3. Select the amount to mint</h2>
+            <MintQuantityComponent />
+          </div>
+          <div className='text-container'>
+            <div  className='text-box'>
+              <h2 className="bbn-font">WTF am I minting?</h2>
+              <p>A Morphling Character Token. IMG: Morphling on a penny</p>
+            </div>
+            <div  className='text-box'>
+              <h2 className="bbn-font">WTF Are morphlings? </h2>
+              <p>A new fantasy civilization in the FotD universe, premiered via ten thousand NFT PFPs. The results of your mint will become cannon.</p>
+            </div>
+            <div  className='text-box'>
+              <h2 className="bbn-font">WTF DOES THE TOKeN DO? </h2>
+              <p>Morphlings are medieval peasant farmers and craftsman, with RPG stats, playing card identities, and owning one is a permanent, lifetime all-access pass to the best of the Fruition of the Damned universe..</p>
             </div>
           </div>
-          <div  className='text-box'>
-            <h2 className='section-1-h1 section-1-alt-h1'>Lorem Ipsum</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-        </div>
       </section>
-      {/* Section 2 */}
-      <section  className='section-row  section-2'>
-        <div  className='box-column'>
+      {/* Mint Section */}
+      <section  className="section-2">
+        <div  className="box-row mint-text-box">
           <div>
-              <h2 className='section-2-h2-west'>WEST</h2>
+            <h2 className='section-2-h2 west-text bngs-font'>WEST</h2>
           </div>
-          <Image src={'/morphs_west.png'} height={250} width={450}/>
+          <h2 className='mint-blurb head-blurb fngr-font'>4. Mint by clicking the button below</h2>
+          <div>
+            <h2 className='section-2-h2 east-text bngs-font'>EAST</h2>
+          </div>
         </div>
-        <div  className='box-column'>
+        <div  className='box-row mint-images'>
           {/* IMAGE GOES HERE WITH LINK*/}
-          <h2 className='mint-blurb head-blurb'>4. Mint by clicking the button below</h2>
-          <Image src={'/mint_button2.png'} onClick={mintToken} height={340} width={358}/>
-          <p  className='mint-blurb'>1 click generates total amount of specified assets</p>
+          <Image src={'/morphs_west.png'} height={250} width={480}/>
+          <Image src={'/mint_button2.png'} height={340} width={358}/>
+          <Image src={'/morphs_east.png'} height={250} width={480}/>
         </div>
-        <div  className='box-column'>
-          <div  className='section-2-east'>
-            <h2 className='section-2-h2-east'>EAST</h2>
-          </div>
-          <Image src={'/morphs_east.png'} height={250} width={450}/>
+        <div className='box-row fngr-font num-box'>
+          <h2>Mints Left: <span className='mint-num'>10000</span></h2>
         </div>
       </section>
-      {/* Section 3 */}
-      <section  className='section-row  section-3 wrap'>
-        <div className='box-column' style={{width: "50%"}}>
-          <h1 className='section-3-h1'>STORY</h1>
-          <h3 className='section-3-h3'>Lorem</h3>
-          <div  className='box-row  section-3-text'>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
+      {/* Phases Section */}
+      <section  className="section-2">
+        <div  className="bbn-font">
+          <h1 className="section-3-head">Road Map</h1>
         </div>
-        {/*IMAGE GOES HERE*/}
-        <div  className='image-thing'>
-          <Image src={'/morphling_big.png'} height={790} width={776}  layout="responsive"/>
+        <div className="box-row phase-row">
+            <PhaseComponent text={phase_1} num='1'/>
+            <PhaseComponent text={phase_2} num='2'/>
+            <PhaseComponent text={phase_3} num='3'/>
         </div>
       </section>
-      {/* Section 4 */}
-      <section  className='section-column section-4'>
-        <div  className='box-row'>
-          <h1 className='section-4-h1'>ROAD MAP</h1>
-        </div>
-        <div  className='box-row wrap'>
-          <PhaseComponent />
-          <div  className='arrow'>
-            <Image src={'/arrows.png'} height={175} width={103}/>
-          </div>
-          <PhaseComponent />
-          <div  className='arrow'>
-            <Image src={'/arrows.png'} height={175} width={103}/>
-          </div>
-          <PhaseComponent />
-        </div>
-      </section>
-      {/* Footer */}
-      <footer className='footer section-row'>
+      {/* Base Section */}
+      <footer className='footer box-row'>
         <div>
           <Image src={'/immu_x_logo_2.png'} height={35} width={224}/>
         </div>
@@ -353,6 +345,6 @@ export default function Home() {
           <Image src={'/air_things.png'} height={59} width={95}/>
         </div>
       </footer>
-    </>
+    </div>
   )
 }

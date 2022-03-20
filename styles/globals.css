@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
 /*
     Comic Neue
@@ -12,82 +13,195 @@
     font-family: 'Comic Neue', cursive;
 */
 
+
+/*
+=======================
+    Root
+=======================
+*/
+
+
+html  {
+  padding: 0;
+  margin: 0;
+
+  /* Base Font for Rem sizes */
+  /* 1.08 vw = 16px at any resolution more or less */
+  font-size: 1.108vw;
+  /* Default Font */
+  font-family: 'Comic Neue', cursive;
+
+}
+
 html, body {
   padding: 0px;
   margin: 0px;
-  /* #817788 */
   color: white;
   background-color: black;
+  /* background-color: grey; */
 }
 
-/* Sections */
-.section-row{
+/*
+=======================
+    Header
+=======================
+*/
+
+header {
   display: flex;
   flex-direction: row;
 }
-.section-column{
-  display: flex;
-  flex-direction: column;
+
+.header-title-image{
 }
-/* Sub Boxes */
+
+nav ul{
+  list-style: none;
+  padding: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+/*
+  border: 1px solid blue; */
+}
+
+nav li {
+  margin: 0 .5em;
+
+  text-decoration: none;
+  font-size: 1.1rem;
+
+  color: white;
+  padding: .25px 0;
+}
+
+.list-item-img {
+  /* width: 100%;
+  max-width: 25%; */
+  /* border: 1px solid red; */
+}
+
+.header-title-text{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 5rem;
+
+  margin: auto;
+  /* border: 1px solid blue; */
+}
+
+.bngs-font{
+  font-family: 'Bangers', cursive;
+}
+
+.bbn-font{
+  font-family: 'Bebas Neue', cursive;
+}
+
+.fngr-font{
+  font-family: 'Finger Paint';
+}
+
+
+/*
+=======================
+    Container
+=======================
+*/
+
+.container{
+  width: 100%;
+  /*
+  max-width:1444px;
+  */
+  margin: auto;
+}
+
 .box-column{
   display: flex;
   flex-direction: column;
 }
+
 .box-row{
   display: flex;
   flex-direction: row;
 }
 
-.box-center{
-  justify-content: center;
+section, footer{
+  display:flex;
+  width: 100%;
+
+  justify-content: space-between;
+  /* border: 1px solid purple; */
 }
 
-/* Header */
-.title-img{
-  margin-left: 1.5rem;
+/* Icon styling */
+.filter{
+  filter: invert(100%);
 }
 
-.header-nav{
-  margin-left: auto;
-  margin-right: 1.5rem;
+/*
+=======================
+    Section 1 | Main/Text
+=======================
+*/
+
+.section-1{
+  justify-content: space-between;
+  gap: 1em;
 }
 
-.header-nav > ul {
-  list-style-type: none;
+.text-container{
+  width: 25%;
+  /* border: 1px solid orange; */
+  margin-left:1em;
 }
 
-.list-item{
-  padding: .5rem;
-  display:  inline;
-  /*
-  border-radius: 25px;
-  */
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-left: .5em;
-  color: white;
+.text-box{
+  width: 100%;
+  max-width: 85%;
 }
 
-.list-item-img{
-  padding: .1rem;
-  display: inline;
+.text-box > h2{
+  text-transform: uppercase;
+  margin: 0;
+  color: #FFB3E4;
 }
 
-/* Section 1 Styling */
-.section-1-header{
-  text-align: center;
-  font-family: 'Bangers', cursive;
-  font-size: 3.5rem;
+.text-box > p {
+  margin: 0;
+  margin-bottom: .5em;
 }
 
-.section-1-header > h1{
-  margin: 0px;
+.steps-box{
+
+  justify-content: flex-end;
+
+  /* border: 1px solid pink; */
+
+  width: 52%;
+}
+
+.steps-box > h1{
+  font-size: 3rem;
+  margin: 0;
+  margin-left: 1em;
+
+  color: #FFB3E4;
+}
+
+.component-box{
+  display: flex;
+  justify-content: flex-end;
+  /* border: 1px solid red; */
 }
 
 .button-selection{
-
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 30%;
 }
 
 .button-selection > h2{
@@ -99,302 +213,136 @@ html, body {
 .button-selection > p {
   font-family: 'Comic Neue', cursive;
   font-size: 1.2rem;
-  width: 242px;
   text-align: center;
-}
-
-/* Temporary */
-.section-1-spacing{
-  justify-content: space-between;
-}
-
-.section-1-gap{
-  gap: 2rem;
-}
-
-.section-1-h1{
-  font-family: 'Bebas Neue', cursive;
-  font-size: 3rem;
-  color: #FFB3E4;
-}
-
-.text-box{
-  width: 25%;
-  font-size: 1.1rem;
-}
-
-.text-box > p {
-  font-family: 'Comic Neue', cursive;
-}
-
-.section-1-alt-h1{
-  font-size: 1.5rem;
-  margin: 0px;
-  margin-top: 4rem;
-}
-
-.section-1-prompts{
-  padding: 1rem;
-  flex-wrap: wrap;
-}
-
-.subbutton-blurb{
-  font-family: 'Comic Neue', cursive;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 0px;
 }
 
 .button-web3-prompts{
-  padding: 1rem;
+  padding: .5em;
   text-align: center;
+
   background-color: #66EFDF;
   border-radius: 20px;
   border: 5px solid #FFFFFF;
 
-  font-family: 'Bebas Neue', cursive;
   color: white;
-  font-size: 2.188rem;
-  margin-left: 2.5rem;
+  font-size: 2rem;
+}
+
+
+.button-box-major{
+  justify-content: space-evenly;
+}
+
+.button-box{
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.button-box > h2{
+  font-size: 1.5rem;
+
+}
+
+.button-box-1{
+  max-width: 35%;
+}
+
+
+.button-box-2{
+  max-width: 40%;
+}
+
+
+/*
+=======================
+    Section 2 | Mint
+=======================
+*/
+
+.section-2{
+  /* display: block; */
+  flex-direction: column;
+  width: 100%;
 }
 
 .special{
-  justify-content: center;
+  width: 100%;
+  display: flex;
+  /* border: 1px solid green; */
 }
 
-.minting-div{
-  border: .3rem solid white;
-  border-radius: 20px;
-  padding: 1rem;
+.mint-text-box{
+  justify-content: space-evenly;
+
+  /* border: 1px solid pink; */
 }
 
-.minting-div > button{
-  display: inline-block;
-  text-align: center;
-}
-
-.minting-div > div{
-  text-align: center;
-}
-/*
-.sub-mint > button, span, h3{
-  display: inline;
-} */
-.sub-mint{
-  gap: .5rem;
-}
-
-
-.mint-button{
-  background-color: #B434C0;
-  border-radius: 50%;
-  border: none;
-
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bolder;
-
-  padding: 1rem;
-  width: 3.5rem;
-
-  cursor: pointer;
-
-}
-
-.mint-button:hover{
-  background-color: #992ca3;
-}
-
-/*  Section 2 Styling */
-.section-2{
+.mint-images{
   justify-content: center;
 }
 
 .section-2-h2{
-  font-family: 'Bangers', cursive;
-  color: white;
-  align-self: flex-start;
-  justify-content: flex-start;
-  font-size: 4rem;
-  margin: 0px;
-}
-
-.section-2-mid{
-  font-family: 'Bangers', cursive;
-  color: white;
-
-  text-align: center;
-  font-size: 3.5rem;
-  margin: 0px;
-  font-weight: bold;
-}
-
-.section-2-h2-west{
-  font-family: 'Bangers', cursive;
-  font-size: 9.375rem;
-  margin: 0px;
-  /*
-  position: relative;
-  top: 6rem;
-  right: 4.8rem;
-  */
-}
-
-.section-2-h2-east{
-  font-family: 'Bangers', cursive;
-  font-size: 9.375rem;
-  margin: 0px;
-  /*
-  position: relative;
-  top: 6rem;
-  left: 15.5rem;
-  */
-  text-align: end;
-}
-
-
-.section-line{
-  position: relative;
-}
-
-/* Image Wrapping */
-
-.image-wrapper{
-  box-sizing: content-box;
-}
-
-.image-west > span{
-  position: relative;
-  top: 3.5rem;
-  left: 17.5rem;
-}
-
-.image-east > span{
-  position: relative;
-  top: 3.5rem;
-  right: 14rem;
-}
-
-.mint-blurb{
-  text-align: center;
-  font-family: 'Comic Neue', cursive;
-  font-size: 1rem;
+  font-size: 9rem;
+  padding: 0;
+  margin: 0;
 }
 
 .head-blurb{
-  font-size: 1.2rem;
-  font-family: 'Finger Paint';
-  text-align: center;
+  align-self: flex-end;
+  font-size: 1.5rem;
 }
 
-/* Icon styling */
-.filter{
-  filter: invert(100%);
+.west-text{
+  position: relative;
+  right: .8em;
+  top: .5em;
 }
 
-/* Section 3 */
-
-.section-3{
-  padding: 1rem;
+.east-text{
+  position: relative;
+  left: .7em;
+  top: .5em;
 }
 
-.image-thing{
-  width: 60%;
-  height: 50%;
-  /*
-  margin-left: auto;
-  */
+.num-box{
+  font-size: 1rem;
+  justify-content: center;
 }
 
-.section-3-h1{
-  font-size: 7rem;
-  font-family: 'Bebas Neue', cursive;
-  margin-top: 0px;
-  margin-bottom: 1rem;
-}
-
-.section-3-h3{
+.mint-num{
+  font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
-  font-family: 'Finger Paint';
   color: #FFB3E4;
-  margin-top: 0px;
-  margin-bottom: 1rem;
 }
 
-.section-3-text{
-  font-family: 'Comic Neue', cursive;
-  font-size: 1.2rem;
+/*
+=======================
+    Section 3 | Info
+=======================
+*/
 
-  width: 100%;
-  height: 50%;
-  gap: 1rem;
+.section-3-head{
+  font-size: 8rem;
+  margin: 0;
+  margin-left: .5em;
 }
 
-/* Section 4 */
-
-.section-4{
-  padding: 1rem;
+.phase-row{
+  justify-content: space-evenly;
 }
 
-.phase-component{
-  width: 343px;
-
-  border-image: linear-gradient(180deg, #9500B1 0%, #FBD5E3 46.35%, #FFFFFF 97.92%) 0 50 50 0;
-  border-style: solid;
-  border-width: .5rem;
-}
-
-.section-4-header{
-
-}
-
-.section-4-header > h2{
-  font-family: 'Finger Paint';
-  margin: 0px;
-  font-size: 2.5rem;
-}
-
-.section-4-header > h3 {
-  margin:0px;
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.6rem;
-}
-
-.section-4-text{
-  width: 90%;
-
-  font-size: 1.1rem;
-}
-
-.section-4-h1{
-  font-size: 7rem;
-  font-family: 'Bebas Neue', cursive;
-  margin-top: 0px;
-  margin-bottom: 1rem;
-
-}
-
-.section-4-p{
-  font-family: 'Finger Paint';
-  color: #FFC0CB;
-
-  margin-left: 30%;
-}
-
-.arrow{
-  align-self: center;
-  padding: .8rem;
-}
-
-.section-4-row{
-  gap: .1rem;
-}
-
+/*
+=======================
+    Section 3 | Info
+=======================
+*/
 .footer{
-  padding: 1rem;
 
   align-items: center;
-  gap: .5rem;
+  gap: .8rem;
+  justify-content: flex-start;
 }
 
 .footer-text{
@@ -403,8 +351,4 @@ html, body {
   color: white;
 
   font-family: 'Bebas Neue', cursive;
-}
-
-.wrap{
-  flex-wrap: wrap;
 }

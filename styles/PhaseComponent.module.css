@@ -1,0 +1,40 @@
+
+.phase-component{
+  width: 100%;
+  max-width: 25%;
+
+  border-image: linear-gradient(180deg, #9500B1 0%, #FBD5E3 46.35%, #FFFFFF 97.92%) 0 50 50 0;
+  border-style: solid;
+  border-width: .5rem;
+}
+
+.section-4-header{
+
+}
+
+.section-4-header > h2{
+  font-family: 'Finger Paint';
+  /* margin: 0px; */
+  font-size: 2.8rem;
+}
+
+.section-4-text{
+  width: 90%;
+
+  font-size: 1.1rem;
+}
+
+.section-4-h1{
+  font-size: 7rem;
+  font-family: 'Bebas Neue', cursive;
+  margin-top: 0px;
+  margin-bottom: 1rem;
+
+}
+
+.section-4-p{
+  font-family: 'Finger Paint';
+  color: #FFC0CB;
+
+  margin-left: 30%;
+}
