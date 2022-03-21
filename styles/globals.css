@@ -13,7 +13,6 @@
     font-family: 'Comic Neue', cursive;
 */
 
-
 /*
 =======================
     Root
@@ -304,6 +303,10 @@ section, footer{
   position: relative;
   left: .7em;
   top: .5em;
+
+  background: -webkit-linear-gradient(180deg, #9500B1 0%, #FBD5E3 57.29%, #FFFFFF 97.4%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .num-box{
@@ -333,6 +336,11 @@ section, footer{
   justify-content: space-evenly;
 }
 
+.arrow{
+  align-self: center;
+  padding: .8em;
+}
+
 /*
 =======================
     Section 3 | Info
@@ -351,4 +359,126 @@ section, footer{
   color: white;
 
   font-family: 'Bebas Neue', cursive;
+}
+
+.image-wrapper{
+  box-sizing: content-box;
+}
+
+/*
+=======================
+    Media
+=======================
+*/
+
+@media all and (max-width:420px){
+  html{
+    font-size: 16px;
+  }
+
+  .header-title-text{
+    display: none;
+  }
+
+  .arrow{
+    display: none;
+  }
+
+  section{
+    flex-direction: column;
+  }
+
+  footer{
+    display: none;
+  }
+
+  .box-row{
+    flex-direction: column;
+  }
+
+  .button-box{
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .steps-box > h1{
+    font-size: 3rem;
+    margin: 0;
+    color: #FFB3E4;
+    text-align: center;
+  }
+
+  .steps-box{
+    justify-content: center;
+    width: 100% !important;
+  }
+
+  .button-selection{
+    width: 100%;
+  }
+
+  .text-container{
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .text-box{
+    max-width: 100%;
+  }
+
+  /* Section II */
+
+  .head-blurb{
+    font-size: 1.3rem;
+  }
+
+  /* section III */
+  .section-3-head{
+    font-size: 6rem;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .phase-row{
+    justify-content: center;
+    align-items: center;
+
+    gap: 1em;
+  }
+
+  .image-wrapper > div {
+    max-width: 20%;
+    max-height: 20%;
+  }
+
+  .special-box{
+    flex-direction: row !important;
+  }
+
+  .west-text{
+    display: none;
+  }
+
+  .east-text{
+    display: none;
+  }
+
+  .rug-image{
+    display: none;
+  }
+
+  .num-box{
+    text-align: center !important;
+  }
+
+  /* temp */
+  nav {
+    display: none;
+  }
+
+  .footer{
+    display: none;
+  }
+
 }

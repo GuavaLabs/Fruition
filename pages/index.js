@@ -49,7 +49,7 @@ export default function Home() {
   phase_1 = ['You’re in it. We come prepared with the comic, the TV pilot, the series bible, and the Morphling NFTs with a ton of fun stats and a fun 50/50 minting event that will write itself into our world.', 'At a bare minimum, owning a FotD NFT means permanent, premium access to our highest resolution content, as early as possible, even the anime some day.']
   phase_2 = ['If we can get over 50% minted, we can commit to hiring developers to turn the Morphlings into the principle assets of an open playing-cards game environment. ',
   'Over promise and under deliver much?', 'We still want to try! We want this to be an entirely free to play games environment for community members, not P2E but P2P — and gather and socialize with 800-year old playing cards that have stood the test of time. Play classic games with people from around the world using the metadata of your Morphlings to build depth into medieval-era playing cards, that’s the end goal. We can start small with solitaire, 1 player games, and hire devs in the community to build from there!']
-  phase_3 = ['RIf we can get 100% minted, we can say full-heartedly that we will be using the majority of those proceeds on making a web3 remote-studio animated series pilot... we wanna be on TV Ma!', 'But seriously we are going to pay creators directly using the power of web3, and excited to explore new territory with transparent creator smart-contracts, hiring a ton of cool web3 artists to join forces on a wild animated series super-project.', 'We’ll need a lot of help on this part if it comes to pass, but there’s an opportunity here to help evolve the way animated series are made altogether.']
+  phase_3 = ['If we can get 100% minted, we can say full-heartedly that we will be using the majority of those proceeds on making a web3 remote-studio animated series pilot... we wanna be on TV Ma!', 'But seriously we are going to pay creators directly using the power of web3, and excited to explore new territory with transparent creator smart-contracts, hiring a ton of cool web3 artists to join forces on a wild animated series super-project.', 'We’ll need a lot of help on this part if it comes to pass, but there’s an opportunity here to help evolve the way animated series are made altogether.']
 
   // Default value is 10, setValue modifies
   const [value, setValue] = useState(10);
@@ -255,7 +255,7 @@ export default function Home() {
   return (
     <div  className="container">
       {/* Main */}
-      <section  class="section-1">
+      <section  className="section-1">
         <div  className='box-column steps-box'>
               <h1 className='bbn-font'>Steps to mint</h1>
               <div  className='box-row button-box-major'>
@@ -305,9 +305,13 @@ export default function Home() {
         </div>
         <div  className='box-row mint-images'>
           {/* IMAGE GOES HERE WITH LINK*/}
-          <Image src={'/morphs_west.png'} height={250} width={480}/>
+          <div  className="rug-image">
+            <Image src={'/morphs_west.png'} height={250} width={480}/>
+          </div>
           <Image src={'/mint_button2.png'} height={340} width={358}/>
-          <Image src={'/morphs_east.png'} height={250} width={480}/>
+          <div  className="rug-image">
+            <Image src={'/morphs_east.png'} height={250} width={480}/>
+          </div>
         </div>
         <div className='box-row fngr-font num-box'>
           <h2>Mints Left: <span className='mint-num'>10000</span></h2>
@@ -320,7 +324,13 @@ export default function Home() {
         </div>
         <div className="box-row phase-row">
             <PhaseComponent text={phase_1} num='1'/>
+            <div  className='arrow'>
+              <Image src={'/arrows.png'} height={175} width={103}/>
+            </div>
             <PhaseComponent text={phase_2} num='2'/>
+            <div  className='arrow'>
+              <Image src={'/arrows.png'} height={175} width={103}/>
+            </div>
             <PhaseComponent text={phase_3} num='3'/>
         </div>
       </section>
