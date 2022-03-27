@@ -16,17 +16,45 @@ function TestFunction(){
 // left button decrements up until 1
 // right button encrements up until 7
 
-export default function MintQuantityComponent(){
+export default function MintQuantityComponent({value, change, price}){
+
+  const decrease = () => {
+    if(value === 1){
+
+        change(1)
+    }
+
+    else
+    {
+      change(value - 1)
+    }
+
+  }
+
+  const increase = () => {
+
+      if (value === 7)
+       {
+         change(7)
+       }
+       else
+       {
+        change(value + 1)
+
+       }
+
+  }
+
   return (
     <>
       <div  className={styles['minting-div']}>
       {/* className='box-row  box-center  sub-mint' */}
         <div  className={`${styles['box-row']} ${styles['box-center']} ${styles['sub-mint']} bbn-font`}>
-          <button className={styles['mint-button']} onClick={TestFunction}>-</button>
-          <p>1</p>
+          <button className={styles['mint-button']} onClick={decrease}>-</button>
+          <p>{value}</p>
           <Image src={'/morphling_small.png'} height={40} width={40} />
-          <p><span className={styles['special']}>@</span> PRICE</p>
-          <button className={styles['mint-button']} onClick={TestFunction}>+</button>
+          <p><span className={styles['special']}>@</span> {price * value}</p>
+          <button className={styles['mint-button']} onClick={increase}>+</button>
         </div>
         <p className={styles['subbutton-blurb']}>Max of 7 mints per user </p>
       </div>

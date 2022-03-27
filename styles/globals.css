@@ -227,6 +227,10 @@ section, footer{
   font-size: 2rem;
 }
 
+.button-connected{
+  background-color: #B434C0;
+}
+
 
 .button-box-major{
   justify-content: space-evenly;

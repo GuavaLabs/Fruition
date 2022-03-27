@@ -52,9 +52,9 @@ export default function Home() {
   phase_3 = ['If we can get 100% minted, we can say full-heartedly that we will be using the majority of those proceeds on making a web3 remote-studio animated series pilot... we wanna be on TV Ma!', 'But seriously we are going to pay creators directly using the power of web3, and excited to explore new territory with transparent creator smart-contracts, hiring a ton of cool web3 artists to join forces on a wild animated series super-project.', 'We’ll need a lot of help on this part if it comes to pass, but there’s an opportunity here to help evolve the way animated series are made altogether.']
 
   // Default value is 10, setValue modifies
-  const [value, setValue] = useState(10);
   //const eth = process.env.REACT_APP_PRICE * value;
-  const eth = 0.01
+  const [value, setValue] = useState(1);
+  const eth = 0.01 * value;
   // Default value is false, setEligable modifies
   const [eligable, setEligable] = useState(false);
   // Default value is false, setLogged modifies
@@ -71,12 +71,13 @@ export default function Home() {
   const [msgState, msgChange] = useState(false);
   // Default value is 0, setCounter modifies
   const [counter, setCounter] = useState(0);
+  // Default Value is false
+  let [connectedWallet, setConnection] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
   }
 
-  //TODO
   // Counter for tokens
 
   // const counterRequest = () => {
@@ -122,6 +123,8 @@ export default function Home() {
     const account = await ethereum.request({ method: "eth_requestAccounts" });
     // saves address in local storage
     localStorage.setItem("address", account[0]);
+    // Set connectWallet to true
+    setConnection(true)
   }
 
   const connectWalletImx = async() =>{
@@ -201,7 +204,7 @@ export default function Home() {
               address: localStorage.getItem("address"),
               hash: res,
               type: "ETH",
-              quantity: 1,
+              quantity: value,
               // 5
               tokenID: 5
             };
@@ -252,6 +255,16 @@ export default function Home() {
 
   });
 
+
+  // Returns
+  async function getMintNum(){
+    let mint_val = await axios.get(`${process.env.REACT_APP_URL}/api/v1/tokennum`)
+
+    return mint_val
+  };
+
+  //let number_of_mints = getMintNum();
+
   return (
     <div  className="container">
       {/* Main */}
@@ -261,21 +274,25 @@ export default function Home() {
               <div  className='box-row button-box-major'>
                 <div  className='button-box button-box-1'>
                   <h2 className='fngr-font'>1. Connect Wallet</h2>
-                  {/* onClick={connectWallet} */}
-                  <button className="button-web3-prompts  bbn-font">Click here</button>
+                  {
+                    (connectedWallet) ? (<button className= "button-connected button-web3-prompts bbn-font">Connected</button>) :
+                    (<button className="button-web3-prompts  bbn-font" onClick={connectWallet} >Click here</button>)
+                  }
                   <p>Works with any Ethereum based wallet</p>
                 </div>
                 <div  className='button-box button-box-2'>
                   <h2 className='fngr-font'>2. Unlock Immutible</h2>
-                  {/* onClick={connectWallet} */}
-                  <button className='button-web3-prompts  bbn-font'>Click here</button>
+                  {
+                    (eligable) ? (<button className= "button-connected button-web3-prompts bbn-font">Connected!</button>) :
+                    (<button className='button-web3-prompts  bbn-font' onClick={connectWalletImx} >Click here</button>)
+                  }
                   <p>A portal to Immutable X will present itself, follow its prompts</p>
                 </div>
               </div>
           </div>
           <div  className='button-selection'>
             <h2>3. Select the amount to mint</h2>
-            <MintQuantityComponent />
+            <MintQuantityComponent value={value} change={setValue} price={eth}/>
           </div>
           <div className='text-container'>
             <div  className='text-box'>
@@ -314,7 +331,8 @@ export default function Home() {
           </div>
         </div>
         <div className='box-row fngr-font num-box'>
-          <h2>Mints Left: <span className='mint-num'>10000</span></h2>
+          {/* <h2>Mints Left: <span className='mint-num'>{number_of_mints}</span></h2> */}
+          <h2>Mints Left: <span className='mint-num'>1000</span></h2>
         </div>
       </section>
       {/* Phases Section */}
