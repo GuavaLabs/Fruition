@@ -17,14 +17,10 @@ import Web3 from "web3";
 // Axios request handlers
 import axios from "axios";
 
-//require('dotenv').config()
-
 /* Local API */
-
 let localAPI = 'http://localhost:3000/api/mint'
 
 /* Declare Production Variables before assignment */
-
 let _link, apiAddress;
 
 /* Determine if in Production */
@@ -39,10 +35,14 @@ if(process.env.PRODUCTION == "True"){
   console.log(process.env.PRODUCTION)
   _link = new Link('https://link.ropsten.x.immutable.com')
   apiAddress = 'https://api.ropsten.x.immutable.com/v1/'
-
 }
 
-export default function Home() {
+export default function Home(props) {
+
+  // Auxiliary Function which returns a number rounded up
+  function roundToTwo(num) {
+    return +(Math.ceil(num + "e+2")  + "e-2");
+  }
 
   let phase_1, phase_2, phase_3;
 
@@ -52,9 +52,10 @@ export default function Home() {
   phase_3 = ['If we can get 100% minted, we can say full-heartedly that we will be using the majority of those proceeds on making a web3 remote-studio animated series pilot... we wanna be on TV Ma!', 'But seriously we are going to pay creators directly using the power of web3, and excited to explore new territory with transparent creator smart-contracts, hiring a ton of cool web3 artists to join forces on a wild animated series super-project.', 'We’ll need a lot of help on this part if it comes to pass, but there’s an opportunity here to help evolve the way animated series are made altogether.']
 
   // Default value is 10, setValue modifies
-  //const eth = process.env.REACT_APP_PRICE * value;
   const [value, setValue] = useState(1);
-  const eth = 0.01 * value;
+  // Base price is retrived from database on render
+  // roundToTwo(props['main_data'] * value)
+  let eth = props['main_data'];
   // Default value is false, setEligable modifies
   const [eligable, setEligable] = useState(false);
   // Default value is false, setLogged modifies
@@ -78,21 +79,6 @@ export default function Home() {
     e.preventDefault();
   }
 
-  // Counter for tokens
-
-  // const counterRequest = () => {
-  //   return new Promise(async (resolve, reject) => {
-  //     const count = await axios.get(
-  //       // REACT_APP_URL = localhost:5000/ | Why?
-  //       `${process.env.REACT_APP_URL}/api/v1/count`
-  //     );
-  //     setCounter(count.data.count);
-  //     resolve("Done");
-  //   });
-  // };
-
-  //counterRequest();
-
   const accountRegistered = async (address) => {
     //This will check if the user is registered with IMX.. If not prompt them to register
     return new Promise(async (resolve, reject) => {
@@ -105,6 +91,87 @@ export default function Home() {
         resolve(false);
       }
     });
+  };
+  // Checks if user is registered in local postgres DB
+  const isUserRegistered = async() =>{
+
+    let status;
+
+    // Body to be sent in request
+    const body_data = {
+      address: localStorage.getItem("address")
+    };
+
+    try{
+      // Using metamask address, make a POST request to the database to see if address is in whitelist
+      status = await axios.post(`${process.env.REACT_APP_URL}/api/v1/whitelist`, body_data)
+
+      // If status == true
+      if(status['data']['whitelist_status']){
+        // Address is in DB
+        return true;
+      }else{
+        // Address is not in DB
+        return false;
+      }
+
+    }catch (e){
+      console.log(`Something happened ${e}`);
+      return false;
+    }
+  }
+
+  // Returns token number in database |
+  async function tokenNum(type){
+    let mint_val;
+
+    // If type is true, return the number
+    if(type){
+      try{
+        mint_val = await axios.get(`${process.env.REACT_APP_URL}/api/v1/token`)
+        return mint_val.data.success
+      }catch(e){
+        console.log(e)
+        return 0
+      }
+
+    }// Else, increment by 1
+    else{
+      try{
+        mint_val = await axios.post(`${process.env.REACT_APP_URL}/api/v1/token`)
+        return 1
+      }catch(e){
+        console.log(e)
+        return 0
+      }
+
+    }
+  };
+
+  async function currentPrice(type){
+    let price;
+
+    // If type is true, return the price
+    if(type){
+      try{
+        price = await axios.get(`${process.env.REACT_APP_URL}/api/v1/currentprice`)
+        return price
+      }catch(e){
+        console.log(e)
+        return 0
+      }
+
+    }// Else, make a post request and increment by 1
+    else{
+      try{
+        price = await axios.post(`${process.env.REACT_APP_URL}/api/v1/currentprice`)
+        return 1
+      }catch(e){
+        console.log(e)
+        return 0
+      }
+
+    }
   };
 
   /*Connects to Web3 ethereum*/
@@ -167,74 +234,104 @@ export default function Home() {
       setEligable(true);
       setLogged(true);
     }
+    // Temporary
     window.alert("You have unlocked I M M U T I B L E  X")
   };
 
-  // Mint Token
+  // Mint Token | This Function is a total mess...
   const mintToken = async () =>{
     //Grab client window
     const web3 = new Web3(window.ethereum);
     // Default Payment is ETH
-    window.alert("Inside Function");
 
-    // Attempt transaction
+    // Check if User is Registered
+    //let registered = await isUserRegistered();
+    let registered = true;
+    // Get Current Token Number
+    let tokenid = await tokenNum(true);
 
-    try {
-      const accounts = await web3.eth.getAccounts();
+    // If User is registered
+    if(registered){
+      try {
+        const accounts = await web3.eth.getAccounts();
+        console.log(eth)
+        // Reciever gets the funds
+        let receiver = process.env.TREASURY
 
-      let receiver = process.env.TREASURY
-      console.log(receiver)
+        web3.eth.sendTransaction(
+          /* Body for Transaction */
+          {
+            to: receiver,
+            from: accounts[0],
+            // value: web3.utils.toWei(eth.toString(), "ether"),
+            value: web3.utils.toWei('0', "ether"),
+          },
+          /* Call Back */
+          async function (err, res) {
 
-      web3.eth.sendTransaction(
-        /* Body for Transaction */
-        {
-          to: receiver,
-          from: accounts[0],
-          value: web3.utils.toWei(eth.toString(), "ether"),
-        },
-        /* Call Back */
-        async function (err, res) {
-          if(res){
-            // test Alert
-            window.alert('Response given, check console')
-            console.log(res)
+            if(res){
+              // Alert upon successful transaction | Create Pop-up
+              // Get Current Token Number | SET TO TRUE IF MINTING
+              window.alert('Response given, check console')
 
-            // Object to be passed to the API
-            const body_data = {
+              // Object to be passed to the API
+              const body_data = {
               address: localStorage.getItem("address"),
               hash: res,
               type: "ETH",
-              quantity: value,
-              // 5
-              tokenID: 5
-            };
+              // How many tokens are being minted
+              quantity: 1,
+              // Token ID number
+              tokenID: tokenid,
+              }
 
-            setEligable(false)
-            setLoading(true)
 
-            try {
-              window.alert('Making an API request')
+              setEligable(false)
+              setLoading(true)
 
-              // `${process.env.REACT_APP_URL}/api/mint`
-              const response = await axios.post(`${process.env.REACT_APP_URL}/api/v1/mint`, body_data)
-              console.log(response)
-              setLoading(false);
-              setEligable(true);
-              console.log(response);
-            } catch(err){
+              try {
+                  window.alert('Making an API request')
 
-              window.alert('Error, check console')
-              console.log(err)
-              setLoading(false);
-              setEligable(true);
+                  console.log(body_data)
+                  console.log("HERE")
+
+
+                  const mint_request = async () =>{ return await axios.post(`${process.env.REACT_APP_URL}/api/v1/mint`, body_data)};
+
+
+                  // This isn't working
+                  // mint_request().then(async (resolve) => {
+                  //   // Upon success, change state variables
+                  //   console.log("HERE2")
+                  //   setLoading(false);
+                  //   setEligable(true);
+                  //   // And make requests to increment price & tokennum
+                  //   let increment_price = await axios.post(`${process.env.REACT_APP_URL}/api/v1/currentprice`);
+                  //   console.log(increment_price)
+                  //   let increment_tokennum = await axios.post(`${process.env.REACT_APP_URL}/api/v1/token`);
+                  //   console.log(increment_tokennum)
+                  //   console.log(resolve)
+                  //   res.status(200).send("OK")
+                  // });
+
+              } catch(err){
+
+                  window.alert('Error, check console')
+                  console.log(err)
+                  setLoading(false);
+                  setEligable(true);
+              }
             }
           }
-        }
-      )
-    } catch(e) {
-      console.log(`Something happened ${e}`)
-      // Testing Alert
-      window.alert('Something Happened, Check console.')
+        )
+      } catch(e) {
+        console.log(`Something happened ${e}`)
+        // Testing Alert
+        window.alert('Something Happened, Check console.')
+      }
+
+    }else{
+      window.alert("You're not registered")
     }
   }
 
@@ -255,19 +352,10 @@ export default function Home() {
 
   });
 
-
-  // Returns
-  async function getMintNum(){
-    let mint_val = await axios.get(`${process.env.REACT_APP_URL}/api/v1/tokennum`)
-
-    return mint_val
-  };
-
-  //let number_of_mints = getMintNum();
-
   return (
     <div  className="container">
       {/* Main */}
+      {/* <button onClick={isUserRegistered}>Check if In WhiteList</button> */}
       <section  className="section-1">
         <div  className='box-column steps-box'>
               <h1 className='bbn-font'>Steps to mint</h1>
@@ -292,7 +380,7 @@ export default function Home() {
           </div>
           <div  className='button-selection'>
             <h2>3. Select the amount to mint</h2>
-            <MintQuantityComponent value={value} change={setValue} price={eth}/>
+            {/* <MintQuantityComponent value={value} change={setValue} price={eth}/> */}
           </div>
           <div className='text-container'>
             <div  className='text-box'>
@@ -325,7 +413,7 @@ export default function Home() {
           <div  className="rug-image">
             <Image src={'/morphs_west.png'} height={250} width={480}/>
           </div>
-          <Image src={'/mint_button2.png'} height={340} width={358}/>
+          <Image src={'/mint_button2.png'} height={340} width={358} onClick={mintToken}/>
           <div  className="rug-image">
             <Image src={'/morphs_east.png'} height={250} width={480}/>
           </div>
@@ -375,4 +463,18 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  // Get Price From DB
+  const data = await axios.get(`${process.env.REACT_APP_URL}/api/v1/currentprice`);
+  // Grab string from request ONLY
+  const main_data = data['data']['success'];
+
+  // Value of props will be passed to Home()
+  return {
+    props: {
+      main_data
+    },
+  }
 }

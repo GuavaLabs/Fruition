@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
   return(
     <>
       <header>
-        <div  class="header-title-image">
+        <div  className="header-title-image">
           <Image src={'/fruition-title.png'} width={340} height={55} className="title-img"/>
         </div>
         {/* Header Title */}
