@@ -290,29 +290,21 @@ export default function Home(props) {
               setLoading(true)
 
               try {
-                  window.alert('Making an API request')
+                  //window.alert('Making an API request')
 
-                  console.log(body_data)
-                  console.log("HERE")
+                  const mint_request = await axios.post(`${process.env.REACT_APP_URL}/api/v1/mint`, body_data);
 
+                  // Make requests to increment price & tokennum
+                  let increment_price = await axios.post(`${process.env.REACT_APP_URL}/api/v1/currentprice`);
 
-                  const mint_request = async () =>{ return await axios.post(`${process.env.REACT_APP_URL}/api/v1/mint`, body_data)};
+                  console.log(increment_price)
 
+                  let increment_tokennum = await axios.post(`${process.env.REACT_APP_URL}/api/v1/token`);
 
-                  // This isn't working
-                  // mint_request().then(async (resolve) => {
-                  //   // Upon success, change state variables
-                  //   console.log("HERE2")
-                  //   setLoading(false);
-                  //   setEligable(true);
-                  //   // And make requests to increment price & tokennum
-                  //   let increment_price = await axios.post(`${process.env.REACT_APP_URL}/api/v1/currentprice`);
-                  //   console.log(increment_price)
-                  //   let increment_tokennum = await axios.post(`${process.env.REACT_APP_URL}/api/v1/token`);
-                  //   console.log(increment_tokennum)
-                  //   console.log(resolve)
-                  //   res.status(200).send("OK")
-                  // });
+                  console.log(increment_tokennum)
+                  // Upon success, change state variables
+                  setLoading(false);
+                  setEligable(true);
 
               } catch(err){
 
