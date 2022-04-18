@@ -7,12 +7,6 @@ import React, { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
 
-  // useEffect(() => {
-  //   AOS.init({
-  //     duration: 2000,
-  //   });
-  // }, []);
-
   return(
     <>
       <header>
@@ -26,23 +20,23 @@ function MyApp({ Component, pageProps }) {
         <nav  className="bbn-font">
           <ul>
             {/* Images */}
-            <Link href="/">
+            <Link href="#roadmap">
               <li className='list-item'>ROADMAP</li>
             </Link>
-            <Link href="/">
+            <Link href="https://www.fotd.world/world">
               <li className='list-item'>WORLD CURRENT</li>
             </Link>
-            <Link href="/">
+            <Link href="https://discord.gg/V2czqvXFUj">
               <li className='list-item-img'>
                 <Image src={'/discord.svg'} width={29}  height={24} className='filter'/>
               </li>
             </Link>
-            <Link href="/">
+            <Link href="https://twitter.com/morphlingsnft?s=21">
               <li className='list-item-img'>
                 <Image src={'/twitter.svg'} width={29}  height={24} className='filter'/>
               </li>
             </Link>
-            <Link href="/">
+            <Link href="https://t.me/+OoZsQhxOa4hiMGFh">
               <li className='list-item-img'>
                 <Image src={'/telegram.svg'} width={29}  height={24}  className='filter'/>
               </li>

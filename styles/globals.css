@@ -24,6 +24,7 @@ html  {
   padding: 0;
   margin: 0;
 
+  scroll-behavior: smooth;
   /* Base Font for Rem sizes */
   /* 1.08 vw = 16px at any resolution more or less */
   font-size: 1.108vw;
@@ -79,6 +80,7 @@ nav li {
   /* width: 100%;
   max-width: 25%; */
   /* border: 1px solid red; */
+  cursor: pointer;
 }
 
 .header-title-text{
@@ -152,9 +154,9 @@ section, footer{
 }
 
 .text-container{
-  width: 25%;
+  width: 30%;
   /* border: 1px solid orange; */
-  margin-left:1em;
+  /* margin-left:1em; */
 }
 
 .text-box{
@@ -179,7 +181,7 @@ section, footer{
 
   /* border: 1px solid pink; */
 
-  width: 52%;
+  width: 60%;
 }
 
 .steps-box > h1{
@@ -225,12 +227,16 @@ section, footer{
 
   color: white;
   font-size: 2rem;
+  cursor: pointer;
+}
+
+.button-web3-prompts:hover{
+  background-color: #16d2bc;
 }
 
 .button-connected{
   background-color: #B434C0;
 }
-
 
 .button-box-major{
   justify-content: space-evenly;

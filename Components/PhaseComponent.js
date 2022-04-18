@@ -2,11 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link';
 import style from '../styles/PhaseComponent.module.css'
 
-/* <Image src={'/phase-box-2.png'} height={90} width={120} />
-<div  className={`box-column ${style['section-4-header']}`}>
-  <h2>Phase X</h2>
-</div> */
-
 export default function PhaseComponent({text, num}){
   return (
     <>
@@ -18,7 +13,7 @@ export default function PhaseComponent({text, num}){
         <div className={style['section-4-text']}>
           {
             text.map((value) =>{
-              return (<p>{value}</p>)
+              return (<p key={value[0]}>{value}</p>)
             })
           }
         </div>

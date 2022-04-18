@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 // Components
 import MintQuantityComponent from '../Components/MintQuantityComponent'
 import PhaseComponent from '../Components/PhaseComponent'
+import Modal from '../Components/modal'
 
 // LINK Imports
 import { ImmutableXClient, Link, ETHTokenType} from '@imtbl/imx-sdk';
@@ -38,7 +39,6 @@ if(process.env.PRODUCTION == "True"){
 }
 
 export default function Home(props) {
-
   // Auxiliary Function which returns a number rounded up
   function roundToTwo(num) {
     return +(Math.ceil(num + "e+2")  + "e-2");
@@ -54,8 +54,7 @@ export default function Home(props) {
   // Default value is 10, setValue modifies
   const [value, setValue] = useState(1);
   // Base price is retrived from database on render
-  // roundToTwo(props['main_data'] * value)
-  let eth = props['main_data'];
+  let eth = props['main_data']['price'];
   // Default value is false, setEligable modifies
   const [eligable, setEligable] = useState(false);
   // Default value is false, setLogged modifies
@@ -74,6 +73,9 @@ export default function Home(props) {
   const [counter, setCounter] = useState(0);
   // Default Value is false
   let [connectedWallet, setConnection] = useState(false);
+  /* Modal Config */
+  const[isOpen, setIsOpen] = useState(false)
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -211,7 +213,6 @@ export default function Home(props) {
         //current address is set in state
         setCurrentAddress(address.address);
 
-        console.log("USER REGISTERED")
         // Set StateVariables
         setEligable(true);
         setCurrentAddress(address[0]);
@@ -223,7 +224,6 @@ export default function Home(props) {
         setEligable(false);
         msgChange(true);
 
-        console.log(error)
         console.log(`An error occured ${error}`)
       }
     }
@@ -235,7 +235,6 @@ export default function Home(props) {
       setLogged(true);
     }
     // Temporary
-    window.alert("You have unlocked I M M U T I B L E  X")
   };
 
   // Mint Token | This Function is a total mess...
@@ -245,8 +244,7 @@ export default function Home(props) {
     // Default Payment is ETH
 
     // Check if User is Registered
-    //let registered = await isUserRegistered();
-    let registered = true;
+    let registered = await isUserRegistered();
     // Get Current Token Number
     let tokenid = await tokenNum(true);
 
@@ -272,7 +270,6 @@ export default function Home(props) {
             if(res){
               // Alert upon successful transaction | Create Pop-up
               // Get Current Token Number | SET TO TRUE IF MINTING
-              window.alert('Response given, check console')
 
               // Object to be passed to the API
               const body_data = {
@@ -290,22 +287,18 @@ export default function Home(props) {
               setLoading(true)
 
               try {
-                  //window.alert('Making an API request')
 
                   const mint_request = await axios.post(`${process.env.REACT_APP_URL}/api/v1/mint`, body_data);
 
                   // Make requests to increment price & tokennum
                   let increment_price = await axios.post(`${process.env.REACT_APP_URL}/api/v1/currentprice`);
 
-                  console.log(increment_price)
-
                   let increment_tokennum = await axios.post(`${process.env.REACT_APP_URL}/api/v1/token`);
 
-                  console.log(increment_tokennum)
                   // Upon success, change state variables
                   setLoading(false);
                   setEligable(true);
-
+                  setIsOpen(true)
               } catch(err){
 
                   window.alert('Error, check console')
@@ -347,7 +340,6 @@ export default function Home(props) {
   return (
     <div  className="container">
       {/* Main */}
-      {/* <button onClick={isUserRegistered}>Check if In WhiteList</button> */}
       <section  className="section-1">
         <div  className='box-column steps-box'>
               <h1 className='bbn-font'>Steps to mint</h1>
@@ -370,10 +362,10 @@ export default function Home(props) {
                 </div>
               </div>
           </div>
-          <div  className='button-selection'>
-            <h2>3. Select the amount to mint</h2>
+          {/* <div  className='button-selection'> */}
+            {/* <h2>3. Select the amount to mint</h2> */}
             {/* <MintQuantityComponent value={value} change={setValue} price={eth}/> */}
-          </div>
+          {/* </div> */}
           <div className='text-container'>
             <div  className='text-box'>
               <h2 className="bbn-font">WTF am I minting?</h2>
@@ -395,7 +387,7 @@ export default function Home(props) {
           <div>
             <h2 className='section-2-h2 west-text bngs-font'>WEST</h2>
           </div>
-          <h2 className='mint-blurb head-blurb fngr-font'>4. Mint by clicking the button below</h2>
+          <h2 className='mint-blurb head-blurb fngr-font'>3. Mint by clicking the button below</h2>
           <div>
             <h2 className='section-2-h2 east-text bngs-font'>EAST</h2>
           </div>
@@ -412,11 +404,11 @@ export default function Home(props) {
         </div>
         <div className='box-row fngr-font num-box'>
           {/* <h2>Mints Left: <span className='mint-num'>{number_of_mints}</span></h2> */}
-          <h2>Mints Left: <span className='mint-num'>1000</span></h2>
+          <h2>Mints Left: <span className='mint-num'>{ 10000 - parseInt(props['main_data']['tokenNum'])}</span></h2>
         </div>
       </section>
       {/* Phases Section */}
-      <section  className="section-2">
+      <section  className="section-2" id="roadmap">
         <div  className="bbn-font">
           <h1 className="section-3-head">Road Map</h1>
         </div>
@@ -452,16 +444,23 @@ export default function Home(props) {
         <div>
           <Image src={'/air_things.png'} height={59} width={95}/>
         </div>
+        {/* <button onClick={() => {setIsOpen(true);}}>Open Modal</button> */}
       </footer>
+      {/* Modal */}
+      <Modal show={isOpen} onClose={() => setIsOpen(false)}></Modal>
     </div>
   )
 }
 
 export async function getStaticProps() {
+  let main_data = {}
   // Get Price From DB
   const data = await axios.get(`${process.env.REACT_APP_URL}/api/v1/currentprice`);
+  // Get Current Token
+  const tokenData = await axios.get(`${process.env.REACT_APP_URL}/api/v1/token`);
   // Grab string from request ONLY
-  const main_data = data['data']['success'];
+  main_data['price'] = data['data']['success'];
+  main_data['tokenNum']= tokenData['data']['success'];
 
   // Value of props will be passed to Home()
   return {
