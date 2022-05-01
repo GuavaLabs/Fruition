@@ -30,6 +30,11 @@ Repository for Fruition On Demand NFT minting web application
 * Added additional images to Section 4
 * Added PlaceHolder Image to Footer
 
+##  A1.5
+* Added rewrite function for Production only
+* Created Popup for users who have minted
+* Added whitelist functionality
+
 # CONTRACT NOTES
 
 * Asset.sol containing function _mintFor(address user, uint256 id, bytes memory) has been deployed to Ropsten test network.

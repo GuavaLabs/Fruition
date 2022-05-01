@@ -18,16 +18,12 @@ import Web3 from "web3";
 // Axios request handlers
 import axios from "axios";
 
-/* Local API */
-let localAPI = 'http://localhost:3000/api/mint'
-
 /* Declare Production Variables before assignment */
 let _link, apiAddress;
 
 /* Determine if in Production */
 
 if(process.env.PRODUCTION == "True"){
-  console.log("Web App in Production")
   _link = new Link("https://link.x.immutable.com");
   apiAddress = 'https://api.x.immutable.com/v1/'
 
@@ -228,7 +224,7 @@ export default function Home(props) {
       }
     }
     else if(registered){
-      console.log(`USER ${address} is registered`);
+      // console.log(`USER ${address} is registered`);
 
       // Set Variables
       setEligable(true);
