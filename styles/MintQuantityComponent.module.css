@@ -1,0 +1,71 @@
+.box-row{
+  display: flex;
+  flex-direction: row;
+}
+
+.box-center{
+  justify-content: center;
+}
+
+.minting-div{
+  border: .3em solid white;
+  border-radius: 20px;
+  padding: 1.5em;
+
+  margin-bottom: 2.5em;
+}
+
+.minting-div > button{
+  display: inline-block;
+  text-align: center;
+}
+
+.minting-div > div{
+  text-align: center;
+}
+/*
+.sub-mint > button, span, h3{
+  display: inline;
+} */
+.sub-mint{
+  gap: .5rem;
+}
+
+.mint-button{
+  background-color: #B434C0;
+  border-radius: 100%;
+  border: none;
+
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bolder;
+
+  padding: 0;
+  cursor: pointer;
+
+  width: 20%;
+
+}
+
+.mint-button:hover{
+  background-color: #992ca3;
+}
+
+.sub-mint > p {
+  margin: 0;
+  text-align: center;
+  font-size: 1.8rem;
+
+  align-self: center;
+}
+
+.minting-div > p {
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+
+.special{
+  color: #88A0C4;
+}

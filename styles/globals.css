@@ -1,111 +1,494 @@
 /* Imports */
+
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
 /*
+    Comic Neue
     font-family: 'Bebas Neue', cursive;
     font-family: 'Bangers', cursive;
+    font-family: 'Comic Neue', cursive;
 */
 
-html,body {
+/*
+=======================
+    Root
+=======================
+*/
+
+
+html  {
   padding: 0;
   margin: 0;
-  background-color: #817788;
+
+  scroll-behavior: smooth;
+  /* Base Font for Rem sizes */
+  /* 1.08 vw = 16px at any resolution more or less */
+  font-size: 1.108vw;
+  /* Default Font */
+  font-family: 'Comic Neue', cursive;
+
 }
+
+html, body {
+  padding: 0px;
+  margin: 0px;
+  color: white;
+  background-color: black;
+  /* background-color: grey; */
+}
+
 /*
-a {
-  color: inherit;
-  text-decoration: none;
-}
+=======================
+    Header
+=======================
+*/
 
-* {
-  box-sizing: border-box;
-} */
-
-/* Sections */
-.section-row{
+header {
   display: flex;
   flex-direction: row;
 }
-.section-column{
-  display: flex;
-  flex-direction: column;
+
+.header-title-image{
 }
-/* Sub Boxes */
+
+nav ul{
+  list-style: none;
+  padding: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+/*
+  border: 1px solid blue; */
+}
+
+nav li {
+  margin: 0 .5em;
+
+  text-decoration: none;
+  font-size: 1.1rem;
+
+  color: white;
+  padding: .25px 0;
+}
+
+.list-item-img {
+  /* width: 100%;
+  max-width: 25%; */
+  /* border: 1px solid red; */
+  cursor: pointer;
+}
+
+.header-title-text{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 5rem;
+
+  margin: auto;
+  /* border: 1px solid blue; */
+}
+
+.bngs-font{
+  font-family: 'Bangers', cursive;
+}
+
+.bbn-font{
+  font-family: 'Bebas Neue', cursive;
+}
+
+.fngr-font{
+  font-family: 'Finger Paint';
+}
+
+
+/*
+=======================
+    Container
+=======================
+*/
+
+.container{
+  width: 100%;
+  /*
+  max-width:1444px;
+  */
+  margin: auto;
+}
+
 .box-column{
   display: flex;
   flex-direction: column;
 }
+
 .box-row{
   display: flex;
   flex-direction: row;
 }
 
-/* Header */
-.title-img{
-  margin-left: 1.5rem;
-}
+section, footer{
+  display:flex;
+  width: 100%;
 
-.header-nav{
-  margin-left: auto;
-  margin-right: 1.5rem;
-}
-
-.header-nav > ul {
-  list-style-type: none;
-}
-
-.list-item{
-  padding: .5rem;
-  display:  inline;
-  /*
-  border-radius: 25px;
-  */
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-left: .5em;
-  color: white;
-}
-
-.list-item-img{
-  padding: .1rem;
-  display: inline;
-}
-
-/*  Section 1 Styling */
-.section-1{
-  justify-content: center;
-}
-
-.section-1-h2{
-  font-family: 'Bangers', cursive;
-  color: white;
-  align-self: flex-start;
-  justify-content: flex-start;
-  font-size: 4rem;
-}
-
-.section-1-mid{
-  font-family: 'Bangers', cursive;
-  color: white;
-
-  text-align: center;
-  font-size: 3.5rem;
-  margin: 0px;
-  font-weight: bold;
-}
-
-.section-1-h2-west{
-  font-family: 'Bangers', cursive;
-  color: white;
-  align-self: flex-start;
-  justify-content: flex-start;
-  font-size: 4rem;
-  margin-left: auto;
+  justify-content: space-between;
+  /* border: 1px solid purple; */
 }
 
 /* Icon styling */
 .filter{
   filter: invert(100%);
+}
+
+/*
+=======================
+    Section 1 | Main/Text
+=======================
+*/
+
+.section-1{
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.text-container{
+  width: 30%;
+  /* border: 1px solid orange; */
+  /* margin-left:1em; */
+}
+
+.text-box{
+  width: 100%;
+  max-width: 85%;
+}
+
+.text-box > h2{
+  text-transform: uppercase;
+  margin: 0;
+  color: #FFB3E4;
+}
+
+.text-box > p {
+  margin: 0;
+  margin-bottom: .5em;
+}
+
+.steps-box{
+
+  justify-content: flex-end;
+
+  /* border: 1px solid pink; */
+
+  width: 60%;
+}
+
+.steps-box > h1{
+  font-size: 3rem;
+  margin: 0;
+  margin-left: 1em;
+
+  color: #FFB3E4;
+}
+
+.component-box{
+  display: flex;
+  justify-content: flex-end;
+  /* border: 1px solid red; */
+}
+
+.button-selection{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 30%;
+}
+
+.button-selection > h2{
+  font-family: 'Finger Paint';
+  font-size: 1.5rem;
+  margin-top: 0px;
+}
+
+.button-selection > p {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.button-web3-prompts{
+  padding: .5em;
+  text-align: center;
+
+  background-color: #66EFDF;
+  border-radius: 20px;
+  border: 5px solid #FFFFFF;
+
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.button-web3-prompts:hover{
+  background-color: #16d2bc;
+}
+
+.button-connected{
+  background-color: #B434C0;
+}
+
+.button-box-major{
+  justify-content: space-evenly;
+}
+
+.button-box{
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.button-box > h2{
+  font-size: 1.5rem;
+
+}
+
+.button-box-1{
+  max-width: 35%;
+}
+
+
+.button-box-2{
+  max-width: 40%;
+}
+
+
+/*
+=======================
+    Section 2 | Mint
+=======================
+*/
+
+.section-2{
+  /* display: block; */
+  flex-direction: column;
+  width: 100%;
+}
+
+.special{
+  width: 100%;
+  display: flex;
+  /* border: 1px solid green; */
+}
+
+.mint-text-box{
+  justify-content: space-evenly;
+
+  /* border: 1px solid pink; */
+}
+
+.mint-images{
+  justify-content: center;
+}
+
+.section-2-h2{
+  font-size: 9rem;
+  padding: 0;
+  margin: 0;
+}
+
+.head-blurb{
+  align-self: flex-end;
+  font-size: 1.5rem;
+}
+
+.west-text{
+  position: relative;
+  right: .8em;
+  top: .5em;
+}
+
+.east-text{
+  position: relative;
+  left: .7em;
+  top: .5em;
+
+  background: -webkit-linear-gradient(180deg, #9500B1 0%, #FBD5E3 57.29%, #FFFFFF 97.4%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.num-box{
+  font-size: 1rem;
+  justify-content: center;
+}
+
+.mint-num{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #FFB3E4;
+}
+
+/*
+=======================
+    Section 3 | Info
+=======================
+*/
+
+.section-3-head{
+  font-size: 8rem;
+  margin: 0;
+  margin-left: .5em;
+}
+
+.phase-row{
+  justify-content: space-evenly;
+}
+
+.arrow{
+  align-self: center;
+  padding: .8em;
+}
+
+/*
+=======================
+    Section 3 | Info
+=======================
+*/
+.footer{
+
+  align-items: center;
+  gap: .8rem;
+  justify-content: flex-start;
+}
+
+.footer-text{
+  text-align: center;
+  font-size: 3.5rem;
+  color: white;
+
+  font-family: 'Bebas Neue', cursive;
+}
+
+.image-wrapper{
+  box-sizing: content-box;
+}
+
+/*
+=======================
+    Media
+=======================
+*/
+
+@media all and (max-width:420px){
+  html{
+    font-size: 16px;
+  }
+
+  .header-title-text{
+    display: none;
+  }
+
+  .arrow{
+    display: none;
+  }
+
+  section{
+    flex-direction: column;
+  }
+
+  footer{
+    display: none;
+  }
+
+  .box-row{
+    flex-direction: column;
+  }
+
+  .button-box{
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .steps-box > h1{
+    font-size: 3rem;
+    margin: 0;
+    color: #FFB3E4;
+    text-align: center;
+  }
+
+  .steps-box{
+    justify-content: center;
+    width: 100% !important;
+  }
+
+  .button-selection{
+    width: 100%;
+  }
+
+  .text-container{
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .text-box{
+    max-width: 100%;
+  }
+
+  /* Section II */
+
+  .head-blurb{
+    font-size: 1.3rem;
+  }
+
+  /* section III */
+  .section-3-head{
+    font-size: 6rem;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .phase-row{
+    justify-content: center;
+    align-items: center;
+
+    gap: 1em;
+  }
+
+  .image-wrapper > div {
+    max-width: 20%;
+    max-height: 20%;
+  }
+
+  .special-box{
+    flex-direction: row !important;
+  }
+
+  .west-text{
+    display: none;
+  }
+
+  .east-text{
+    display: none;
+  }
+
+  .rug-image{
+    display: none;
+  }
+
+  .num-box{
+    text-align: center !important;
+  }
+
+  /* temp */
+  nav {
+    display: none;
+  }
+
+  .footer{
+    display: none;
+  }
+
 }
