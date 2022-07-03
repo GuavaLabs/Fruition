@@ -37,7 +37,8 @@ Repository for Fruition Of The Damned NFT minting web application
 
 # CONTRACT NOTES
 
-* Asset.sol containing function _mintFor(address user, uint256 id, bytes memory) shoukd be deployed to Ropsten test network.
+* Asset.sol containing function _mintFor(address user, uint256 id, bytes memory) to initially be deployed to Ropsten test network.
+  * Upon completion, contract should be deployed to Ethereum Mainnet.
 
 * Constructor for Asset.sol: constructor(address _owner, string memory _name, string memory _symbol, address _imx)
 
